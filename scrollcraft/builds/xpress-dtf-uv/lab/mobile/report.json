@@ -1,0 +1,2349 @@
+{
+  "doc": {
+    "height": 12245,
+    "vh": 844,
+    "acts": [
+      "pin",
+      "pin",
+      "pin",
+      "flow",
+      "pin",
+      "flow",
+      "flow",
+      "pin"
+    ],
+    "world": null
+  },
+  "report": [
+    {
+      "i": 0,
+      "y": 14,
+      "pct": 0,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado ",
+          "dir": "light-on-dark",
+          "worst": 8.75,
+          "mean": 11.54
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madei",
+          "dir": "light-on-dark",
+          "worst": 11.81,
+          "mean": 14.98
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "dir": "light-on-dark",
+          "worst": 15.35,
+          "mean": 15.67
+        }
+      ],
+      "cues": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado O form",
+          "o": 1
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madeira. Um",
+          "o": 1
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        1505,
+        3109,
+        5499,
+        11218
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 1,
+      "y": 143,
+      "pct": 1,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado ",
+          "dir": "light-on-dark",
+          "worst": 8.51,
+          "mean": 11.42
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madei",
+          "dir": "light-on-dark",
+          "worst": 12.26,
+          "mean": 15.17
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "dir": "light-on-dark",
+          "worst": 15.15,
+          "mean": 15.45
+        }
+      ],
+      "cues": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado O form",
+          "o": 1
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madeira. Um",
+          "o": 1
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        1376,
+        2980,
+        5370,
+        11089
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 2,
+      "y": 273,
+      "pct": 2,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado ",
+          "dir": "light-on-dark",
+          "worst": 8.51,
+          "mean": 11.3
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madei",
+          "dir": "light-on-dark",
+          "worst": 12.44,
+          "mean": 15.32
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "dir": "light-on-dark",
+          "worst": 14.82,
+          "mean": 15.21
+        }
+      ],
+      "cues": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado O form",
+          "o": 1
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madeira. Um",
+          "o": 1
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        1246,
+        2850,
+        5240,
+        10959
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 3,
+      "y": 402,
+      "pct": 4,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado ",
+          "dir": "light-on-dark",
+          "worst": 8.51,
+          "mean": 11.21
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madei",
+          "dir": "light-on-dark",
+          "worst": 12.93,
+          "mean": 15.44
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "dir": "light-on-dark",
+          "worst": 14.61,
+          "mean": 14.99
+        }
+      ],
+      "cues": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado O form",
+          "o": 1
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madeira. Um",
+          "o": 1
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "none",
+        "none"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        1117,
+        2721,
+        5111,
+        10830
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 4,
+      "y": 532,
+      "pct": 5,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado ",
+          "dir": "light-on-dark",
+          "worst": 8.51,
+          "mean": 11.15
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madei",
+          "dir": "light-on-dark",
+          "worst": 13.29,
+          "mean": 15.57
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "dir": "light-on-dark",
+          "worst": 14.27,
+          "mean": 14.72
+        }
+      ],
+      "cues": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado O form",
+          "o": 1
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madeira. Um",
+          "o": 1
+        },
+        {
+          "t": "À primeira vista, parecem iguais.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 100%)",
+        "inset(0px 100% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        987,
+        2591,
+        4981,
+        10700
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 5,
+      "y": 662,
+      "pct": 6,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado ",
+          "dir": "light-on-dark",
+          "worst": 8.51,
+          "mean": 11.11
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madei",
+          "dir": "light-on-dark",
+          "worst": 4.7,
+          "mean": 15.3
+        }
+      ],
+      "cues": [
+        {
+          "t": "Adesivo comum Vinil impressoe recortado O form",
+          "o": 1
+        },
+        {
+          "t": "DTF UV Sua marca em vidro, metal e madeira. Um",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 100%)",
+        "inset(0px 100% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        0,
+        857,
+        2461,
+        4851,
+        10570
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 6,
+      "y": 1534,
+      "pct": 13,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superf",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superfície p",
+          "o": 1
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal Madei",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 100%)",
+        "inset(0px 100% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -859,
+        0,
+        1589,
+        3979,
+        9698
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 7,
+      "y": 1680,
+      "pct": 15,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superf",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superfície p",
+          "o": 1
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal Madei",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 98.52%)",
+        "inset(0px 93.29% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -1005,
+        0,
+        1443,
+        3833,
+        9552
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 8,
+      "y": 1826,
+      "pct": 16,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superf",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superfície p",
+          "o": 1
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal Madei",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 48.66%)",
+        "inset(0px 51.57% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -1151,
+        0,
+        1297,
+        3687,
+        9406
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 9,
+      "y": 1972,
+      "pct": 17,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superf",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superfície p",
+          "o": 1
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal Madei",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0.85%)",
+        "inset(0px 8.47% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -1297,
+        0,
+        1151,
+        3541,
+        9260
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 10,
+      "y": 2118,
+      "pct": 19,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superf",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superfície p",
+          "o": 1
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal Madei",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -1443,
+        0,
+        1005,
+        3395,
+        9114
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 11,
+      "y": 2264,
+      "pct": 20,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superf",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Onde o vinil para Superfície lisa Superfície p",
+          "o": 1
+        },
+        {
+          "t": "Onde o DTF UV gruda Vidro Acrílico Metal Madei",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -1589,
+        0,
+        859,
+        3249,
+        8968
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 12,
+      "y": 3140,
+      "pct": 28,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de ",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A cor n",
+          "o": 1
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de suport",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -2465,
+        -861,
+        0,
+        2373,
+        8092
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 13,
+      "y": 3302,
+      "pct": 29,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de ",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A cor n",
+          "o": 1
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de suport",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -2627,
+        -1023,
+        0,
+        2211,
+        7930
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 14,
+      "y": 3464,
+      "pct": 30,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de ",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A cor n",
+          "o": 1
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de suport",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -2789,
+        -1185,
+        0,
+        2049,
+        7768
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 15,
+      "y": 3626,
+      "pct": 32,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de ",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A cor n",
+          "o": 1
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de suport",
+          "o": 1
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no forma",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -2951,
+        -1347,
+        0,
+        1887,
+        7606
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 16,
+      "y": 3788,
+      "pct": 33,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de ",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A cor n",
+          "o": 1
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de suport",
+          "o": 1
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no forma",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -3113,
+        -1509,
+        0,
+        1725,
+        7444
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 17,
+      "y": 3950,
+      "pct": 35,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de ",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A cor n",
+          "o": 1
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de suport",
+          "o": 1
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no forma",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -3275,
+        -1671,
+        0,
+        1563,
+        7282
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 18,
+      "y": 3998,
+      "pct": 35,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A",
+          "dir": "light-on-dark",
+          "worst": 12.42,
+          "mean": 12.42
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de ",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Duas camadas Cor impressa Vinil branco A cor n",
+          "o": 1
+        },
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de suport",
+          "o": 1
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no forma",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -3323,
+        -1719,
+        -31,
+        1515,
+        7234
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 19,
+      "y": 4295,
+      "pct": 38,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de ",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de suport",
+          "o": 1
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no forma",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -3620,
+        -2016,
+        -328,
+        1218,
+        6937
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 20,
+      "y": 4592,
+      "pct": 40,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de ",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Cinco camadas Verniz Cor CMYK Branco de suport",
+          "o": 1
+        },
+        {
+          "t": "Folha de DTF UV da Xpress. A arte sai no forma",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -3917,
+        -2313,
+        -625,
+        921,
+        6640
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 21,
+      "y": 4889,
+      "pct": 43,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -4214,
+        -2610,
+        -922,
+        624,
+        6343
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 22,
+      "y": 5186,
+      "pct": 45,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -4511,
+        -2907,
+        -1219,
+        327,
+        6046
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 23,
+      "y": 5483,
+      "pct": 48,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -4808,
+        -3204,
+        -1516,
+        30,
+        5749
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 24,
+      "y": 5567,
+      "pct": 49,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -4892,
+        -3288,
+        -1600,
+        0,
+        5665
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 25,
+      "y": 6086,
+      "pct": 53,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Você recebe a arte impressa no filme, já",
+          "dir": "light-on-dark",
+          "worst": 7.21,
+          "mean": 7.21
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        },
+        {
+          "t": "Você recebe a arte impressa no filme, já no fo",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -5411,
+        -3807,
+        -2119,
+        0,
+        5146
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 26,
+      "y": 6605,
+      "pct": 58,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Posiciona na peça e alisa de um lado ao ",
+          "dir": "light-on-dark",
+          "worst": 7.21,
+          "mean": 7.21
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        },
+        {
+          "t": "Posiciona na peça e alisa de um lado ao outro.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -5930,
+        -4326,
+        -2638,
+        0,
+        4627
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 27,
+      "y": 7123,
+      "pct": 62,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Destaca o filme por um canto, devagar.",
+          "dir": "light-on-dark",
+          "worst": 7.21,
+          "mean": 7.21
+        },
+        {
+          "t": "Destaque unidade por unidade, na hora de",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.85
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        },
+        {
+          "t": "Destaca o filme por um canto, devagar.",
+          "o": 1
+        },
+        {
+          "t": "Destaque unidade por unidade, na hora de usar.",
+          "o": 0.99
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -6448,
+        -4844,
+        -3156,
+        0,
+        4109
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 28,
+      "y": 7642,
+      "pct": 67,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Pronto. Sem prensa, sem calor, sem tempo",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Destaque unidade por unidade, na hora de",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.85
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        },
+        {
+          "t": "Pronto. Sem prensa, sem calor, sem tempo de cu",
+          "o": 1
+        },
+        {
+          "t": "Destaque unidade por unidade, na hora de usar.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -6967,
+        -5363,
+        -3675,
+        0,
+        3590
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 29,
+      "y": 8160,
+      "pct": 72,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Pronto. Sem prensa, sem calor, sem tempo",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Destaque unidade por unidade, na hora de",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.85
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        },
+        {
+          "t": "Pronto. Sem prensa, sem calor, sem tempo de cu",
+          "o": 1
+        },
+        {
+          "t": "Destaque unidade por unidade, na hora de usar.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -7485,
+        -5881,
+        -4193,
+        0,
+        3072
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 30,
+      "y": 8256,
+      "pct": 72,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "A aplicação",
+          "dir": "light-on-dark",
+          "worst": 5.94,
+          "mean": 5.94
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Pronto. Sem prensa, sem calor, sem tempo",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        },
+        {
+          "t": "Destaque unidade por unidade, na hora de",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.85
+        }
+      ],
+      "cues": [
+        {
+          "t": "A aplicação",
+          "o": 1
+        },
+        {
+          "t": "O filme sai. A arte fica.",
+          "o": 1
+        },
+        {
+          "t": "Pronto. Sem prensa, sem calor, sem tempo de cu",
+          "o": 1
+        },
+        {
+          "t": "Destaque unidade por unidade, na hora de usar.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -7581,
+        -5977,
+        -4289,
+        -42,
+        2976
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 31,
+      "y": 8652,
+      "pct": 76,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Destaque unidade por unidade, na hora de",
+          "dir": "light-on-dark",
+          "worst": 14.88,
+          "mean": 15.95
+        }
+      ],
+      "cues": [
+        {
+          "t": "Destaque unidade por unidade, na hora de usar.",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -7977,
+        -6373,
+        -4685,
+        -438,
+        2580
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 32,
+      "y": 9049,
+      "pct": 79,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -8374,
+        -6770,
+        -5082,
+        -835,
+        2183
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 33,
+      "y": 9445,
+      "pct": 83,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -8770,
+        -7166,
+        -5478,
+        -1231,
+        1787
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 34,
+      "y": 9472,
+      "pct": 83,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -8797,
+        -7193,
+        -5505,
+        -1258,
+        1760
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 35,
+      "y": 9816,
+      "pct": 86,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -9141,
+        -7537,
+        -5849,
+        -1602,
+        1416
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 36,
+      "y": 9841,
+      "pct": 86,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -9166,
+        -7562,
+        -5874,
+        -1627,
+        1391
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 37,
+      "y": 10161,
+      "pct": 89,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -9486,
+        -7882,
+        -6194,
+        -1947,
+        1071
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 38,
+      "y": 10238,
+      "pct": 90,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -9563,
+        -7959,
+        -6271,
+        -2024,
+        994
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 39,
+      "y": 10506,
+      "pct": 92,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [
+        -9831,
+        -8227,
+        -6539,
+        -2292,
+        726
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 40,
+      "y": 10851,
+      "pct": 95,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -10176,
+        -8572,
+        -6884,
+        -2637,
+        381
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 41,
+      "y": 11196,
+      "pct": 98,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -10521,
+        -8917,
+        -7229,
+        -2982,
+        36
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 42,
+      "y": 11235,
+      "pct": 99,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -10560,
+        -8956,
+        -7268,
+        -3021,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 43,
+      "y": 11268,
+      "pct": 99,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção e",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção em 1 di",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -10593,
+        -8989,
+        -7301,
+        -3054,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 44,
+      "y": 11300,
+      "pct": 99,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção e",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção em 1 di",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -10625,
+        -9021,
+        -7333,
+        -3086,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 45,
+      "y": 11333,
+      "pct": 99,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção e",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção em 1 di",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -10658,
+        -9054,
+        -7366,
+        -3119,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 46,
+      "y": 11365,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção e",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção em 1 di",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -10690,
+        -9086,
+        -7398,
+        -3151,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 47,
+      "y": 11398,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção e",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção em 1 di",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -10723,
+        -9119,
+        -7431,
+        -3184,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    },
+    {
+      "i": 48,
+      "y": 11401,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção e",
+          "dir": "light-on-dark",
+          "worst": 15.84,
+          "mean": 15.84
+        }
+      ],
+      "cues": [
+        {
+          "t": "Manda a arte.A gente imprime. Produção em 1 di",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 0px 0px 0%)",
+        "inset(0px 0% 0px 0px)"
+      ],
+      "act": "pin",
+      "stages": [
+        -10726,
+        -9122,
+        -7434,
+        -3187,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#06121D"
+    }
+  ],
+  "consoleErrors": [],
+  "failed": []
+}

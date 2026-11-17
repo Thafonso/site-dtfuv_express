@@ -1,0 +1,744 @@
+/* ============================================================================
+   Xpress · DTF UV
+   Gramática: split stage. A divisória é o chrome; o colapso é o fechamento.
+   Este arquivo só tematiza e acrescenta. O motor (scrollcraft.css/js) é
+   mecanismo e não é editado.
+   ========================================================================= */
+
+@property --split { syntax: '<percentage>'; inherits: true; initial-value: 50%; }
+@property --peel  { syntax: '<number>';     inherits: true; initial-value: 0; }
+
+/* ---------- 1 · tokens ---------------------------------------------------- */
+
+:root {
+  /* o mundo DTF UV: o acento mora aqui, e só aqui */
+  --sc-canvas:     #06121D;
+  --sc-surface:    #0D2639;
+  --sc-ink:        #EEF4F9;
+  --sc-ink-soft:   #92A9BC;
+  --sc-accent:     #2E9DE8;
+  --sc-accent-ink: #04111C;
+
+  --sc-font-display: "Archivo", "Archivo Expanded", system-ui, sans-serif;
+  --sc-font-text:    "Geist", system-ui, -apple-system, sans-serif;
+
+  /* o mundo do vinil: mesma família escura, sem acento nenhum */
+  --vl-ground:   #17191C;
+  --vl-surface:  #212529;
+  --vl-ink:      #D7D9DC;
+  --vl-ink-soft: #8E9398;
+  --vl-line:     rgba(215,217,220,.16);
+
+  --uv-line:  rgba(150,196,230,.20);
+  --uv-glow:  rgba(46,157,232,.30);
+
+  --split: 50%;
+  --cap-x: 50vw;
+
+  --h-xl: clamp(2.35rem, 3.4vw, 3.5rem);
+  --h-lg: clamp(2.1rem, 3.3vw, 3.3rem);
+  --h-md: clamp(1.55rem, 2.1vw, 2.3rem);
+  --h-sm: clamp(1.2rem, 1.5vw, 1.6rem);
+}
+
+body[data-stop="1"] { --split: 50%; }
+body[data-stop="2"] { --split: 44%; }
+body[data-stop="3"] { --split: 38%; }
+body[data-stop="4"] { --split: 31%; }
+body[data-stop="6"],
+body[data-stop="7"],
+body[data-stop="8"] { --split: 0%; }
+
+/* O scroll programático fica instantâneo de propósito: o motor e o harness de
+   verificação escrevem scrollTop direto, e um smooth global atrapalharia os
+   dois. A rolagem suave fica só nos links do índice, feita em site.js. */
+
+body {
+  background: var(--vl-ground);
+  font-family: var(--sc-font-text);
+  overflow-x: clip;
+}
+
+/* ---------- 2 · os dois chãos -------------------------------------------- */
+
+.world { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+
+.world__vinil,
+.world__uv { position: absolute; inset: 0; }
+
+.world__vinil {
+  background:
+    radial-gradient(120% 80% at 18% 12%, #23262A 0%, rgba(35,38,42,0) 62%),
+    linear-gradient(180deg, #1B1E21 0%, #141619 100%);
+}
+
+.world__uv {
+  transform: translateX(var(--split));
+  transition: transform 720ms cubic-bezier(.23,1,.32,1);
+  will-change: transform;
+  background:
+    radial-gradient(90% 60% at 30% 18%, rgba(46,157,232,.22) 0%, rgba(46,157,232,0) 60%),
+    radial-gradient(70% 70% at 85% 95%, rgba(16,64,101,.55) 0%, rgba(16,64,101,0) 65%),
+    linear-gradient(180deg, #0A1E2E 0%, #06121D 70%, #050F18 100%);
+  box-shadow: -1px 0 0 var(--uv-line), -30px 0 70px rgba(0,0,0,.55);
+}
+
+body[data-peak] .world__uv { transition: none; }
+
+/* ---------- 3 · chrome: a divisória, o cap e o índice -------------------- */
+
+.rail {
+  position: fixed; inset: 0; width: 100%;
+  z-index: var(--sc-z-chrome, 60);
+  pointer-events: none;
+  transform: translateX(var(--split));
+  transition: transform 720ms cubic-bezier(.23,1,.32,1), opacity 420ms ease-out;
+  will-change: transform;
+}
+body[data-peak] .rail { transition: opacity 420ms ease-out; }
+body[data-resolved] .rail { opacity: 0; }
+
+.rail__line {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 1px;
+  background: linear-gradient(180deg,
+    rgba(46,157,232,0) 0%, var(--uv-glow) 14%, var(--uv-glow) 86%, rgba(46,157,232,0) 100%);
+}
+
+.rail__sides {
+  position: absolute; left: 0; bottom: clamp(16px, 3vh, 34px);
+  margin: 0; display: flex; align-items: baseline; gap: 0;
+  font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.rail__side { padding: 0 .9rem; }
+.rail__side--a { transform: translateX(-100%); color: var(--vl-ink-soft); text-align: right; }
+.rail__side--b { color: var(--sc-accent); }
+
+/* cap: a marca e o único CTA, montados sobre a linha */
+.cap {
+  position: fixed; top: clamp(12px, 2vh, 20px); left: 0;
+  z-index: calc(var(--sc-z-chrome, 60) + 2);
+  display: flex; align-items: center; gap: clamp(12px, 2vw, 28px);
+  padding: .4rem .5rem .4rem .7rem;
+  transform: translateX(calc(var(--cap-x) - 50%));
+  transition: transform 720ms cubic-bezier(.23,1,.32,1);
+  border-radius: 999px;
+  background: rgba(6,18,29,.62);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(14px) saturate(1.2);
+}
+body[data-peak] .cap { transition: none; }
+
+.cap__mark { display: block; line-height: 0; border-radius: 6px; }
+.cap__mark img { width: clamp(84px, 8vw, 112px); height: auto; display: block; }
+.cap__menu { display: none; }
+
+/* índice lateral: as paradas do argumento */
+.stops {
+  position: fixed; left: clamp(10px, 1.6vw, 22px); top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--sc-z-chrome, 60);
+}
+.stops ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.stops a {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .22rem .4rem; border-radius: 6px;
+  color: var(--sc-ink-soft); text-decoration: none;
+  font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
+}
+.stops i {
+  width: 16px; height: 1px; flex: none; background: currentColor; opacity: .5;
+  transition: width 220ms var(--sc-ease-out, ease-out), opacity 220ms ease-out;
+}
+.stops span {
+  opacity: 0; transform: translateX(-4px);
+  transition: opacity 200ms ease-out, transform 200ms var(--sc-ease-out, ease-out);
+}
+.stops a[aria-current="true"] { color: var(--sc-ink); }
+.stops a[aria-current="true"] i { width: 30px; opacity: 1; background: var(--sc-accent); }
+.stops a[aria-current="true"] span { opacity: 1; transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .stops a:hover { color: var(--sc-ink); }
+  .stops a:hover span { opacity: 1; transform: none; }
+}
+
+.skip {
+  position: fixed; top: 8px; left: 8px; z-index: 999;
+  padding: .6rem 1rem; border-radius: 8px;
+  background: var(--sc-accent); color: var(--sc-accent-ink);
+  font-weight: 600; text-decoration: none;
+  transform: translateY(-160%);
+}
+.skip:focus-visible { transform: none; }
+
+/* ---------- 4 · tipografia ----------------------------------------------- */
+
+.sc-display { font-family: var(--sc-font-display); font-weight: 700; font-stretch: 96%; }
+.h-xl { font-size: var(--h-xl); line-height: .98; letter-spacing: -.028em; text-wrap: balance; }
+.h-lg { font-size: var(--h-lg); line-height: 1.02; letter-spacing: -.024em; text-wrap: balance; }
+.h-md { font-size: var(--h-md); line-height: 1.08; letter-spacing: -.016em; text-wrap: balance; }
+.h-sm { font-size: var(--h-sm); line-height: 1.14; letter-spacing: -.01em; }
+
+.lede, .side__inner .lede { max-width: 44ch; color: var(--sc-ink-soft); line-height: 1.62; text-wrap: pretty; }
+.note { max-width: 42ch; color: var(--vl-ink-soft); font-size: .9375rem; line-height: 1.6; text-wrap: pretty; }
+.note--b { color: var(--sc-ink-soft); }
+.fine { font-size: .8125rem; color: var(--sc-ink-soft); line-height: 1.55; }
+
+.tag {
+  margin: 0; font-family: var(--sc-font-display); font-weight: 600;
+  font-size: .6875rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--vl-ink-soft);
+}
+.tag--accent { color: var(--sc-accent); }
+
+/* ---------- 5 · botões e estados ----------------------------------------- */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  white-space: nowrap;
+  padding: .78rem 1.35rem; border-radius: 999px;
+  font-family: var(--sc-font-display); font-weight: 600; font-size: .9375rem;
+  letter-spacing: -.005em; text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 140ms ease-out, color 140ms ease-out,
+              border-color 140ms ease-out, transform 120ms ease-out;
+}
+.btn--primary { background: var(--sc-accent); color: var(--sc-accent-ink); }
+.btn--ghost { color: var(--sc-ink); border-color: rgba(238,244,249,.28); }
+.btn--lg { padding: 1rem 1.9rem; font-size: 1.0625rem; }
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover { background: #4FB1F0; }
+  .btn--ghost:hover { border-color: var(--sc-accent); color: var(--sc-accent); }
+}
+.btn:active { transform: translateY(1px); }
+.cap__cta { padding: .6rem 1.1rem; font-size: .875rem; }
+
+:where(a, button, summary, details):focus-visible {
+  outline: 2px solid var(--sc-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- 6 · o palco dividido ----------------------------------------- */
+
+.act { position: relative; z-index: var(--sc-z-copy, 10); }
+
+/* .sc-stage é o mecanismo: sticky, 100svh, overflow clip, tudo vem do motor.
+   Aqui só se acrescenta layout, nunca posicionamento. */
+.stage { display: grid; align-items: center; }
+.act--4 { position: relative; }
+
+.duo {
+  display: grid;
+  grid-template-columns: var(--col, 50%) 1fr;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.act--1 .duo { --col: 50%; }
+.act--2 .duo { --col: 44%; }
+.act--3 .duo { --col: 38%; }
+.act--4 .duo { --col: 31%; }
+
+.side { position: relative; display: flex; align-items: center; min-width: 0; }
+.side__inner { display: grid; gap: clamp(.9rem, 1.4vh, 1.4rem); min-width: 0; }
+
+.side--a {
+  justify-content: flex-end;
+  color: var(--vl-ink);
+  padding: 7rem clamp(1.6rem, 3vw, 3.4rem) 5rem clamp(1.2rem, 4vw, 4rem);
+}
+.side--a .side__inner { max-width: 30rem; }
+.side--b {
+  color: var(--sc-ink);
+  padding: 7rem clamp(1.2rem, 4vw, 4rem) 5rem clamp(1.6rem, 3vw, 3.4rem);
+}
+.side--b .side__inner { max-width: 32rem; }
+.act--1 .side--b .side__inner { max-width: 29rem; }
+
+.actions { display: flex; flex-wrap: wrap; gap: .7rem; margin: .35rem 0 0; }
+
+/* planos de profundidade do herói */
+.plane { position: absolute; inset: -12% -6%; pointer-events: none; }
+.plane--glow {
+  background: radial-gradient(44% 46% at 72% 36%, rgba(46,157,232,.26) 0%, rgba(46,157,232,0) 68%);
+}
+.plane--grid {
+  opacity: .5;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 68px 68px;
+  mask-image: radial-gradient(70% 60% at 50% 42%, #000 0%, transparent 78%);
+}
+.plane--film {
+  inset: auto -6% -6% -6%; height: 34vh;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(160,205,240,.07) 55%, rgba(6,18,29,.9) 100%);
+}
+
+/* O cue do motor escreve transform neste elemento, então a centralização NÃO
+   pode usar translateX: ela vive no inset e no text-align, e a pílula é um
+   filho. */
+.hook {
+  position: absolute; left: 0; right: 0; bottom: clamp(52px, 8vh, 88px);
+  margin: 0; text-align: center;
+}
+.hook span {
+  display: inline-block; padding: .5rem 1.1rem;
+  font-family: var(--sc-font-display); font-weight: 600;
+  font-size: clamp(.8125rem, 1.1vw, .9375rem); letter-spacing: .04em;
+  color: var(--sc-ink);
+  background: rgba(6,18,29,.68);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+}
+
+.decal { margin: .6rem 0 0; max-width: 17rem; }
+.decal svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 18px 28px rgba(0,0,0,.45)); }
+.decal figcaption { margin-top: .7rem; font-size: .8125rem; color: var(--vl-ink-soft); }
+
+.hero-shot {
+  position: absolute; right: clamp(.5rem, 2vw, 2rem); bottom: 0;
+  margin: 0; width: clamp(128px, 12vw, 190px);
+  pointer-events: none;
+}
+.hero-shot img {
+  width: 100%; height: auto; display: block;
+  border-radius: 12px 12px 0 0;
+  border: 1px solid var(--uv-line); border-bottom: 0;
+  mask-image: linear-gradient(180deg, #000 68%, transparent 100%);
+  filter: saturate(.86) brightness(.94) drop-shadow(0 30px 50px rgba(0,0,0,.6));
+}
+
+/* ---------- 7 · ato 2 · superfícies -------------------------------------- */
+
+.surf { list-style: none; margin: 0; padding: 0; display: grid; gap: .42rem; }
+.surf li {
+  font-family: var(--sc-font-display); font-weight: 600;
+  font-size: clamp(1rem, 1.4vw, 1.25rem); letter-spacing: -.01em;
+  padding-left: 1.1rem; position: relative;
+}
+.surf li::before {
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: 7px; height: 1px; background: currentColor; opacity: .55;
+}
+.surf--a li { color: var(--vl-ink); }
+.surf--b li { color: var(--sc-ink); }
+.surf--b li::before { background: var(--sc-accent); opacity: 1; height: 2px; }
+
+.wipe { position: relative; }
+
+/* ---------- 8 · ato 3 · camadas ------------------------------------------ */
+
+.stack { position: relative; display: grid; gap: .5rem; margin: .4rem 0 .2rem; }
+.stack__l {
+  position: relative;
+  padding: .62rem .9rem;
+  border-radius: 7px;
+  font-size: .8125rem; letter-spacing: .09em; text-transform: uppercase;
+  font-family: var(--sc-font-display); font-weight: 600;
+  border: 1px solid var(--vl-line);
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+  color: var(--vl-ink);
+  box-shadow: 0 10px 22px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.stack--b .stack__l { border-color: var(--uv-line); color: var(--sc-ink); }
+.stack__l--v { background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.03)); }
+/* tinta escura sobre as faixas claras: a regra .stack--b .stack__l é mais
+   específica, então estas precisam do mesmo peso para não pintar branco
+   sobre branco */
+.stack--b .stack__l--c {
+  background: linear-gradient(100deg, #5AB6F0, #4FD6C8 45%, #F093AC);
+  color: #06121D; border-color: transparent;
+}
+.stack--b .stack__l--w {
+  background: linear-gradient(180deg, #F2F6F9, #D6E2EC);
+  color: #0B2B43; border-color: transparent;
+}
+.stack__l--a { background: repeating-linear-gradient(135deg, rgba(255,255,255,.07) 0 6px, rgba(255,255,255,.02) 6px 12px); }
+.stack__l--s { background: linear-gradient(180deg, rgba(13,38,57,.9), rgba(6,18,29,.9)); }
+
+.evidence {
+  position: absolute; right: clamp(.5rem, 2vw, 2.4rem); bottom: clamp(1rem, 4vh, 3rem);
+  margin: 0; width: clamp(150px, 16vw, 250px);
+}
+.evidence img {
+  width: 100%; height: auto; display: block; border-radius: 10px;
+  border: 1px solid var(--uv-line);
+  box-shadow: 0 26px 48px rgba(0,0,0,.55);
+}
+.evidence figcaption { margin-top: .6rem; font-size: .75rem; color: var(--sc-ink-soft); max-width: 24ch; }
+
+/* ---------- 9 · ato 4 · o ato quieto ------------------------------------- */
+
+.quiet { padding: clamp(5rem, 12vh, 9rem) 0; }
+.duo--flow { height: auto; align-items: start; }
+.quiet .side--a, .quiet .side--b { padding-top: 0; padding-bottom: 0; }
+.fact {
+  margin: 0;
+  font-family: var(--sc-font-display); font-weight: 500; font-stretch: 92%;
+  font-size: clamp(1rem, 1.35vw, 1.2rem); line-height: 1.38;
+  letter-spacing: -.012em;
+  color: var(--vl-ink); max-width: 30ch;
+  padding-top: .85rem; border-top: 1px solid var(--vl-line);
+}
+.fact--b { color: var(--sc-ink); border-top-color: var(--uv-line); }
+
+/* ---------- 10 · ato 5 · o pico, o destaque ------------------------------ */
+
+.stage--peak { align-content: center; }
+.peak {
+  display: grid;
+  grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  /* a faixa da esquerda pertence ao índice fixo; a cópia começa depois dela */
+  width: min(100% - clamp(8.5rem, 10vw, 11rem) - clamp(1.5rem, 4vw, 4rem), 1320px);
+  margin-left: clamp(8.5rem, 10vw, 11rem);
+  margin-right: auto;
+  padding-block: 7rem 4rem;
+}
+.peak__copy { display: grid; gap: .9rem; align-content: center; justify-items: start; }
+
+/* os quatro passos ocupam a MESMA célula: um de cada vez, no mesmo lugar */
+.peak__steps { display: grid; min-height: 4.6rem; }
+.peak__steps > .step { grid-area: 1 / 1; }
+.step {
+  margin: 0; max-width: 34ch; line-height: 1.55;
+  color: var(--sc-ink-soft); font-size: 1rem;
+}
+.peak__steps .step:last-child { color: var(--sc-ink); }
+
+.peak__stage { position: relative; display: grid; gap: 1rem; justify-items: center; }
+
+.peel { width: 100%; max-width: 44rem; }
+.peel__panel {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  touch-action: pan-y;
+  /* sem isto o arraste seleciona a arte e o realce de seleção (tematizado no
+     acento) pinta o logotipo de azul e fica lá depois de soltar */
+  -webkit-user-select: none; user-select: none;
+  cursor: grab;
+}
+.peel__panel:active { cursor: grabbing; }
+.peel__art img { -webkit-user-drag: none; pointer-events: none; }
+@media (hover: none), (pointer: coarse) { .peel__panel { cursor: default; } }
+.peel__glass {
+  position: absolute; inset: 0; border-radius: 12px;
+  background:
+    linear-gradient(118deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,0) 26%),
+    linear-gradient(160deg, #15405E 0%, #0A2437 48%, #071A28 100%);
+  border: 1px solid rgba(160,205,240,.22);
+  box-shadow: 0 40px 80px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.12);
+}
+.peel__art { position: absolute; inset: 0; display: grid; place-items: center; }
+.peel__art img {
+  width: 54%; height: auto; display: block;
+  filter: drop-shadow(0 2px 0 rgba(0,0,0,.35)) drop-shadow(0 10px 18px rgba(0,0,0,.4));
+}
+/* a parte ainda coberta pelo filme: véu fosco, cor levemente puxada para trás */
+.peel__haze {
+  position: absolute; inset: 0; border-radius: 12px;
+  clip-path: inset(0 calc(var(--peel) * 100%) 0 0 round 12px);
+  background:
+    linear-gradient(104deg, rgba(226,240,252,.2) 0%, rgba(196,222,246,.12) 42%, rgba(226,240,252,.2) 100%);
+  backdrop-filter: blur(1.8px) saturate(.72) brightness(1.08);
+  box-shadow: inset -1px 0 0 rgba(236,246,255,.55);
+}
+
+.peel__hinge {
+  position: absolute; inset: 0;
+  transform: translateX(calc(100% - var(--peel) * 100%));
+}
+
+/* sombra que a aba dobrada joga sobre o filme ainda colado, à esquerda da dobra */
+.peel__shade {
+  position: absolute; top: 0; bottom: 0; right: 100%; width: 100%;
+  transform-origin: right center;
+  transform: scaleX(calc(var(--peel) * 0.5));
+  background: linear-gradient(270deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.16) 58%, rgba(0,0,0,0) 100%);
+}
+
+/* A aba dobra PARA TRÁS, por cima do filme que ainda não saiu. É assim que se
+   destaca um transfer, e é o que deixa a arte já descolada continuar à vista. */
+.peel__flap {
+  position: absolute; top: 0; bottom: 0; right: 100%; width: 100%;
+  transform-origin: right center;
+  transform:
+    perspective(1600px)
+    rotateY(calc(72deg * var(--peel)))
+    rotate(calc(-1.4deg * var(--peel)))
+    scaleX(var(--peel));
+  border-radius: 14px 0 0 14px;
+  background:
+    linear-gradient(270deg,
+      rgba(255,255,255,.5) 0%,
+      rgba(214,236,255,.18) 7%,
+      rgba(255,255,255,.04) 38%,
+      rgba(255,255,255,.03) 66%,
+      rgba(176,216,250,.14) 90%,
+      rgba(255,255,255,.4) 100%),
+    linear-gradient(176deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 28%, rgba(255,255,255,0) 74%, rgba(255,255,255,.09) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -1px 0 rgba(255,255,255,.26);
+}
+
+/* a dobra, onde o filme vira: a linha mais clara da cena */
+.peel__fold {
+  position: absolute; top: -3px; bottom: -3px; left: -2px; width: 4px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,.12) 0%, rgba(255,255,255,.95) 18%,
+    rgba(255,255,255,.95) 82%, rgba(255,255,255,.12) 100%);
+  filter: blur(.7px);
+  opacity: calc(var(--peel) * 4);
+}
+/* a parte já descolada: brilho duro de peça envernizada, nítida */
+.peel__gloss {
+  position: absolute; inset: 0; border-radius: 12px; pointer-events: none;
+  clip-path: inset(0 0 0 calc(100% - var(--peel) * 100%) round 12px);
+  background:
+    linear-gradient(126deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 26%),
+    linear-gradient(300deg, rgba(120,190,245,.12) 0%, rgba(255,255,255,0) 34%);
+}
+.peel__hint {
+  margin: .9rem 0 0; text-align: center;
+  font-size: .75rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--sc-ink-soft);
+  transition: opacity 300ms ease-out;
+}
+.peel__hint[hidden] { display: none; }
+body[data-dragged] .peel__hint { opacity: 0; }
+
+.peak__proof {
+  margin: .6rem 0 0; width: clamp(130px, 11vw, 168px);
+}
+.peak__proof img {
+  width: 100%; height: auto; display: block; border-radius: 10px;
+  border: 1px solid var(--uv-line);
+  box-shadow: 0 22px 44px rgba(0,0,0,.6);
+}
+.peak__proof figcaption { margin-top: .5rem; font-size: .6875rem; line-height: 1.4; color: var(--sc-ink-soft); max-width: 22ch; }
+
+/* ---------- 11 · depois do colapso: uma coluna só ------------------------ */
+
+.resolved { color: var(--sc-ink); }
+.resolved .sc-wrap { width: min(100% - 2 * clamp(1.5rem, 6vw, 6rem), 1120px); margin-inline: auto; }
+.act--6 { padding: clamp(5rem, 11vh, 8.5rem) 0 clamp(3rem, 7vh, 5rem); }
+.act--7 { padding: clamp(3rem, 7vh, 5rem) 0 clamp(5rem, 11vh, 8rem); }
+.lead { gap: .7rem; margin-bottom: clamp(2.2rem, 5vh, 3.4rem); }
+
+.steps {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: clamp(1.4rem, 3vw, 2.4rem);
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  counter-reset: s;
+}
+.steps li { counter-increment: s; padding-top: 1.1rem; border-top: 1px solid var(--uv-line); }
+.steps h3 {
+  margin: 0 0 .6rem; font-family: var(--sc-font-display); font-weight: 700;
+  font-size: 1.1875rem; letter-spacing: -.015em;
+}
+.steps h3::before {
+  content: counter(s) "."; margin-right: .5rem; color: var(--sc-accent);
+}
+.steps p { margin: 0 0 .5rem; color: var(--sc-ink-soft); line-height: 1.6; max-width: 38ch; text-wrap: pretty; }
+.steps .fine { margin-bottom: 0; }
+
+.formats {
+  display: flex; flex-wrap: wrap; gap: .8rem;
+  margin-top: clamp(2rem, 5vh, 3rem);
+}
+.format {
+  display: grid; gap: .1rem; padding: 1rem 1.4rem;
+  border: 1px solid var(--uv-line); border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
+  box-shadow: 0 14px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
+  transform-style: preserve-3d;
+}
+.format__n {
+  font-family: var(--sc-font-display); font-weight: 700; font-size: 1.5rem;
+  letter-spacing: -.02em; font-variant-numeric: tabular-nums;
+}
+.format__u { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--sc-ink-soft); }
+
+/* FAQ */
+.faq-wrap { max-width: 56rem; }
+.faq { border-top: 1px solid var(--uv-line); }
+.faq details { border-bottom: 1px solid var(--uv-line); }
+.faq summary {
+  display: flex; align-items: baseline; gap: 1rem; cursor: pointer;
+  list-style: none; padding: 1.15rem 0;
+  font-family: var(--sc-font-display); font-weight: 600;
+  font-size: clamp(1rem, 1.25vw, 1.1rem); letter-spacing: -.012em;
+  color: var(--sc-ink);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ""; margin-left: auto; flex: none;
+  width: 11px; height: 11px; align-self: center;
+  border-right: 2px solid var(--sc-accent); border-bottom: 2px solid var(--sc-accent);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 180ms var(--sc-ease-out, ease-out);
+}
+.faq details[open] summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
+.faq details > div { padding: 0 0 1.3rem; }
+.faq p { margin: 0; max-width: 62ch; color: var(--sc-ink-soft); line-height: 1.65; text-wrap: pretty; }
+@media (hover: hover) and (pointer: fine) { .faq summary:hover { color: var(--sc-accent); } }
+
+/* ---------- 12 · ato 8 · a placa final ----------------------------------- */
+
+.close { align-content: center; }
+.close__plate {
+  width: min(100% - 2 * clamp(1.5rem, 6vw, 6rem), 1120px);
+  margin-inline: auto;
+  padding-block: clamp(3rem, 8vh, 6rem) clamp(1.5rem, 4vh, 2.5rem);
+  display: grid; gap: clamp(2.5rem, 7vh, 4.5rem);
+}
+.close__ask { display: grid; gap: 1rem; justify-items: start; }
+.close__ask .btn { margin-top: .5rem; }
+
+.foot { display: grid; gap: clamp(1.6rem, 4vh, 2.6rem); padding-top: clamp(1.6rem, 4vh, 2.4rem); border-top: 1px solid var(--uv-line); }
+.foot__mark img { width: 108px; height: auto; display: block; }
+.foot__mark p { margin: .7rem 0 0; font-size: .875rem; color: var(--sc-ink-soft); max-width: 44ch; }
+.foot__cols { display: grid; gap: clamp(1.4rem, 3vw, 2.5rem); grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+.foot__cols h3 {
+  margin: 0 0 .7rem; font-family: var(--sc-font-display); font-weight: 600;
+  font-size: .6875rem; letter-spacing: .18em; text-transform: uppercase; color: var(--sc-ink);
+}
+.foot__cols p { margin: 0 0 .5rem; font-size: .875rem; line-height: 1.6; color: var(--sc-ink-soft); }
+.foot__cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+.foot__cols a { font-size: .875rem; color: var(--sc-ink-soft); text-decoration: none; text-underline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) { .foot__cols a:hover { color: var(--sc-accent); text-decoration: underline; } }
+.foot__legal { margin: 0; font-size: .75rem; color: var(--sc-ink-soft); opacity: .8; }
+
+/* ---------- 13 · telefone: a comparação vira vertical -------------------- */
+
+@media (max-width: 860px) {
+  :root { --h-xl: clamp(2rem, 8.6vw, 2.6rem); }
+
+  .world__uv {
+    transform: translateY(var(--split));
+    box-shadow: 0 -1px 0 var(--uv-line), 0 -24px 48px rgba(0,0,0,.55);
+  }
+  body[data-stop="1"] { --split: 46%; }
+  body[data-stop="2"] { --split: 42%; }
+  body[data-stop="3"] { --split: 38%; }
+  body[data-stop="4"] { --split: 34%; }
+
+  .rail { transform: translateY(var(--split)); }
+  .rail__line { top: 0; bottom: auto; left: 0; right: 0; width: auto; height: 1px;
+    background: linear-gradient(90deg, rgba(46,157,232,0), var(--uv-glow) 20%, var(--uv-glow) 80%, rgba(46,157,232,0)); }
+  .rail__sides { left: 0; right: 0; bottom: auto; top: 0; justify-content: space-between; padding: 0 1rem; }
+  .rail__side--a { transform: translateY(-140%); padding: 0; }
+  .rail__side--b { transform: translateY(40%); padding: 0; }
+
+  .cap {
+    left: 0; right: 0; top: 0; transform: none !important;
+    width: 100%; border-radius: 0; padding: .55rem clamp(.9rem, 4vw, 1.4rem);
+    border-width: 0 0 1px; gap: .6rem;
+  }
+  .cap__mark { margin-right: auto; }
+  .cap__cta { padding: .55rem .95rem; font-size: .8125rem; }
+  .cap__menu {
+    display: grid; place-items: center; width: 40px; height: 40px;
+    background: none; border: 1px solid rgba(255,255,255,.14); border-radius: 10px;
+    cursor: pointer; padding: 0;
+  }
+  .cap__bars, .cap__bars::before, .cap__bars::after {
+    display: block; width: 16px; height: 1.5px; background: var(--sc-ink); border-radius: 2px;
+  }
+  .cap__bars { position: relative; }
+  .cap__bars::before, .cap__bars::after { content: ""; position: absolute; left: 0; }
+  .cap__bars::before { top: -5px; } .cap__bars::after { top: 5px; }
+
+  .stops {
+    left: 0; right: 0; top: 0; transform: none;
+    padding: 4.2rem clamp(1rem, 5vw, 1.6rem) 1.4rem;
+    background: rgba(6,18,29,.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--uv-line);
+    visibility: hidden; opacity: 0;
+    transition: opacity 200ms ease-out, visibility 0s linear 200ms;
+  }
+  body[data-menu="open"] .stops { visibility: visible; opacity: 1; transition-delay: 0s; }
+  .stops ol { gap: .15rem; }
+  .stops a { padding: .7rem .2rem; font-size: .8125rem; }
+  .stops span { opacity: 1; transform: none; }
+
+  .duo, .duo--hero { grid-template-columns: 1fr; grid-template-rows: var(--col, 46%) 1fr; height: 100%; }
+  .act--1 .duo, .act--2 .duo, .act--3 .duo, .act--4 .duo { --col: auto; }
+  .side--a, .side--b {
+    justify-content: stretch; align-items: center;
+    padding: 1.2rem clamp(1.1rem, 5vw, 1.8rem);
+  }
+  .side--a { padding-top: 4.6rem; }
+  .side--b { padding-bottom: 3.4rem; }
+  .side--a .side__inner, .side--b .side__inner { max-width: none; width: 100%; }
+
+  .act--1 .side--a { padding-top: 5rem; padding-bottom: 1.6rem; }
+  .act--1 .side--b { padding-top: 2.6rem; padding-bottom: 4rem; }
+  .act--2 .side--b, .act--3 .side--b { padding-top: 2.4rem; }
+
+  /* No telefone a taça sai do absoluto e entra no fluxo, como amostra quadrada
+     abaixo dos botões: empilhada sobre o h1 ela destruía o contraste do título. */
+  .act--1 .side--b {
+    flex-direction: column; justify-content: center; align-items: flex-start;
+    gap: 1.1rem;
+  }
+  .hero-shot {
+    position: static; margin: 0; width: 92px; aspect-ratio: 1;
+    overflow: hidden; border-radius: 10px; border: 1px solid var(--uv-line);
+  }
+  .hero-shot img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 26%;
+    border: 0; border-radius: 0; mask-image: none; filter: saturate(.9);
+  }
+
+  /* a folha impressa vira selo no canto; a legenda sai, porque o alt já carrega
+     a informação e a nota do ato já diz o que a foto mostra */
+  .evidence { position: absolute; right: .8rem; bottom: 1.7rem; width: 108px; max-width: none; margin: 0; }
+  .evidence figcaption { display: none; }
+
+  .decal { max-width: 11rem; }
+  .decal figcaption { display: none; }
+  .hook { bottom: 12px; }
+  .hook span { font-size: .75rem; padding: .4rem .85rem; }
+
+  .stack { gap: .35rem; }
+  .stack__l { padding: .5rem .75rem; font-size: .6875rem; }
+
+  .quiet { padding: 4rem 0; }
+  .quiet .duo--flow { grid-template-rows: auto auto; gap: 2.4rem; }
+  .fact { font-size: .9375rem; }
+
+  .peak {
+    grid-template-columns: 1fr; gap: 1.4rem; padding-block: 5rem 3rem;
+    width: min(100% - 2 * clamp(1.1rem, 5vw, 1.8rem), 40rem);
+    margin-inline: auto;
+  }
+  .peak__copy { gap: .65rem; }
+  .peak__steps { min-height: 4.2rem; }
+  .step { font-size: .9375rem; }
+  /* no telefone a dobra tem menos espaço lateral, então ela abre menos */
+  .peel__panel { aspect-ratio: 4 / 3; }
+  .peel__flap { transform: perspective(900px) rotateY(calc(78deg * var(--peel))) scaleX(var(--peel)); }
+  .peak__proof { width: 122px; margin-top: 1.1rem; }
+  /* o destaque também responde ao dedo, então a dica fica no telefone */
+  .peel__hint { margin-top: .7rem; font-size: .6875rem; }
+
+  .close__plate { padding-block: 4.5rem 1.5rem; }
+}
+
+@media (max-width: 420px) {
+  .cap__cta { display: none; }
+}
+
+/* ---------- 14 · movimento reduzido -------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .world__uv, .rail, .cap { transition: none; }
+  .peel { --peel: .58; }
+  .peel__hint { display: none; }
+  .stops i, .stops span, .btn { transition: none; }
+}
