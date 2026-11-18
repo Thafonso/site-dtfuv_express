@@ -7,6 +7,14 @@
    ========================================================================= */
 
 @property --split { syntax: '<percentage>'; inherits: true; initial-value: 50%; }
+/* --seam é o mesmo valor, mas escrito direto em .world__uv e .rail em vez de
+   no <body>. --split herda, então mexer nele no body recalcula o estilo do
+   documento inteiro — e esta página tem centenas de spans, dos títulos
+   cinéticos. Por parada isso não custa nada; a cada quadro, como o telefone
+   precisa nos atos que rolam, levava o p95 de 35ms para 125ms. Propositalmente
+   não registrado com @property: sem registro ele é inválido-por-garantia
+   quando não está setado, e `var(--seam, var(--split))` cai no valor por
+   parada sozinho. */
 @property --peel  { syntax: '<number>';     inherits: true; initial-value: 0; }
 
 /* ---------- 1 · tokens ---------------------------------------------------- */
@@ -85,7 +93,7 @@ body {
 }
 
 .world__uv {
-  transform: translateX(var(--split));
+  transform: translateX(var(--seam, var(--split)));
   transition: transform 720ms cubic-bezier(.23,1,.32,1);
   will-change: transform;
   background:
@@ -97,13 +105,21 @@ body {
 
 body[data-peak] .world__uv { transition: none; }
 
+/* No telefone os dois primeiros atos rolam, então a divisória tem que andar
+   colada na costura entre as duas faixas, quadro a quadro. Com a transição de
+   720ms ligada, cada escrita de --split reiniciaria a animação e a rolagem
+   engasgava (p95 de 35ms para 118ms, medido); aqui ela sai, do mesmo jeito que
+   já sai no pico, e a divisória passa a seguir o conteúdo direto. */
+body[data-seam] .world__uv { transition: none; }
+body[data-seam] .rail      { transition: opacity 420ms ease-out; }
+
 /* ---------- 3 · chrome: a divisória, o cap e o índice -------------------- */
 
 .rail {
   position: fixed; inset: 0; width: 100%;
   z-index: var(--sc-z-chrome, 60);
   pointer-events: none;
-  transform: translateX(var(--split));
+  transform: translateX(var(--seam, var(--split)));
   transition: transform 720ms cubic-bezier(.23,1,.32,1), opacity 420ms ease-out;
   will-change: transform;
 }
@@ -626,13 +642,13 @@ body[data-dragged] .peel__hint { opacity: 0; }
   }
 
   .world__uv {
-    transform: translateY(var(--split));
+    transform: translateY(var(--seam, var(--split)));
     box-shadow: 0 -1px 0 var(--uv-line), 0 -24px 48px rgba(0,0,0,.55);
   }
   body[data-stop="1"] { --split: 52%; }
   body[data-stop="2"] { --split: 46%; }
 
-  .rail { transform: translateY(var(--split)); }
+  .rail { transform: translateY(var(--seam, var(--split))); }
   .rail__line { top: 0; bottom: auto; left: 0; right: 0; width: auto; height: 1px;
     background: linear-gradient(90deg, rgba(46,157,232,0), var(--uv-glow) 20%, var(--uv-glow) 80%, rgba(46,157,232,0)); }
   .rail__sides { display: none; }
@@ -698,7 +714,38 @@ body[data-dragged] .peel__hint { opacity: 0; }
   .duo--hero .side { align-items: center; }
   .duo--hero .side__inner { gap: .5rem; }
   .duo--hero .line { display: none; }
-  .shot { max-width: none; aspect-ratio: 5 / 2; margin-top: 0; }
+  /* A amostra é a peça que vende, e com o ato fixo ela não passava de uma tira
+     de 2.5:1: a tela tinha que caber, de uma vez, a chamada, as duas portas e
+     os dois botões, e sobravam 25 a 74px (lab/hero.mjs). Mesmo escondendo tudo
+     o que dava, o teto era ~1.75:1 nos aparelhos altos e 2.5:1 nos curtos.
+     Então o herói passa a rolar, como os atos 1 e 2 já faziam abaixo de 640px
+     e o ato 6 faz desde sempre: a foto volta a ser foto e o botão do DTF UV
+     fica a um empurrão de distância — num telefone, barato perto de mostrar o
+     trabalho direito. */
+  .act--1 { height: auto !important; }
+  .act--1 .sc-stage {
+    /* `relative`, não `static`: ver a nota no bloco de telas muito curtas —
+       as placas de profundidade são absolutas e precisam deste recorte */
+    position: relative; height: auto; min-height: 100svh;
+    overflow-x: clip; overflow-y: visible;
+  }
+  .hero { height: auto; }
+  .duo--hero { grid-template-rows: auto auto; height: auto; }
+  .duo--hero .side { justify-content: start; }
+
+  /* no telefone a coluna já é estreita e isto não muda nada; no tablet evita o
+     bloco encostado à esquerda com meia tela vazia do lado */
+  .duo--hero .side__inner { max-width: 26rem; margin-inline: auto; }
+
+  .shot {
+    margin-top: 0;
+    aspect-ratio: 4 / 3;
+    /* no telefone isto não morde (a coluna é mais estreita), mas no tablet
+       uma foto de 733px de largura viraria cartaz */
+    max-width: 26rem;
+    /* teto em vh para a foto não engolir a tela num aparelho alto */
+    max-height: min(44vh, 20rem);
+  }
   .shot--uv img { object-position: 50% 26%; }
   .actions .btn { padding: .62rem 1.05rem; font-size: .875rem; }
 
@@ -755,9 +802,8 @@ body[data-dragged] .peel__hint { opacity: 0; }
 /* Aparelho curto: o herói e a placa de contato têm que caber inteiros, com os
    dois botões ainda à vista. */
 @media (max-width: 860px) and (max-height: 820px) {
-  .hero__lead .lede { display: none; }
-  .shot { aspect-ratio: 6 / 2; }
-
+  /* com o herói rolando, a lede não precisa mais sair: ela é a proposta de
+     valor, e quem lia a página num aparelho curto ficava sem ela */
   .peak__proofs { display: none; }
   .peak__steps { min-height: 5.6rem; }
 
@@ -783,23 +829,19 @@ body[data-dragged] .peel__hint { opacity: 0; }
    como o ato 6 já faz: nada é escondido, nada é cortado, só deixa de ser
    espremido. O pico continua fixo — é ele que justifica a página. */
 @media (max-width: 860px) and (max-height: 640px) {
-  .act--1, .act--2 { height: auto !important; }
-  .act--1 .sc-stage, .act--2 .sc-stage {
-    /* `relative`, não `static`: as placas de profundidade do herói são
-       absolutas e sangram de propósito (inset negativo). Com o palco estático
-       elas passariam a se posicionar pelo <section> e escapariam do recorte,
-       dando rolagem lateral. Relativo ele sai do sticky mas continua sendo o
-       bloco de contenção que as segura. */
+  /* o herói já rola em qualquer telefone; aqui o ato da comparação acompanha */
+  .act--2 { height: auto !important; }
+  .act--2 .sc-stage {
+    /* `relative`, não `static`: as placas de profundidade são absolutas e
+       sangram de propósito (inset negativo). Com o palco estático elas
+       passariam a se posicionar pelo <section> e escapariam do recorte, dando
+       rolagem lateral. Relativo ele sai do sticky mas continua sendo o bloco
+       de contenção que as segura. */
     position: relative; height: auto; min-height: 100svh;
     overflow-x: clip; overflow-y: visible;
   }
-  .hero { grid-template-rows: auto auto; height: auto; }
-  .duo, .duo--hero { grid-template-rows: auto auto; height: auto; }
-  .side--a, .side--b { justify-content: start; }
-
-  /* com a rolagem liberada, a amostra volta a ter altura de foto */
-  .shot { aspect-ratio: 5 / 3; max-width: 17rem; }
-  .duo--hero .side__inner { gap: .6rem; }
+  .act--2 .duo { grid-template-rows: auto auto; height: auto; }
+  .act--2 .side--a, .act--2 .side--b { justify-content: start; }
   .act--2 .side--a { padding-top: calc(var(--cap-h) + 1.2rem); }
   .act--2 .side--b { padding-bottom: 1.6rem; }
 }

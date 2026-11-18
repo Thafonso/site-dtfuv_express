@@ -307,7 +307,9 @@ outras placas da página.
 `lab/check.mjs` (geometria em 6 telas, de 1440x900 a 320x568), `lab/sheet.mjs`
 (percurso em 15 quadros), `lab/final.mjs` (títulos cinéticos, movimento
 reduzido, arraste do destaque, ordem de tabulação), `lab/overflow.mjs` (quem
-empurra a página para os lados) e `lab/perf.mjs` (fluidez da rolagem a 390x844
+empurra a página para os lados), `lab/hero.mjs` (quanto espaço sobra para a
+amostra em cada telefone), `lab/seam.mjs` (se a divisória está onde o conteúdo
+diz que ela deveria estar) e `lab/perf.mjs` (fluidez da rolagem a 390x844
 com a CPU afunilada 4x, pela mediana de várias passadas — uma passada só varia
 demais para comparar duas versões). Rodam direto no `index.html` por `file://`,
 sem servidor.
@@ -344,6 +346,38 @@ no lugar.
 `--split` no `body` todo quadro reinicia a transição de 720ms de `.world__uv`,
 e o p95 foi de 35ms para 118ms. A medição por troca de parada basta — conferido
 em 320x568, a divisória acompanha o conteúdo.
+
+## A amostra do herói no telefone (18/11/2026)
+
+O cliente disse que a foto estava "muito recortada". Estava: com o ato fixo, a
+amostra não passava de uma tira de 2.5:1 (6:2 em tela baixa), porque a tela
+tinha que caber, de uma vez, a chamada, as duas portas e os dois botões.
+`lab/hero.mjs` mediu o orçamento e mostrou que não havia conserto pequeno:
+sobravam de 25 a 74px acima da dobra, e mesmo escondendo a lede o teto era
+~1.75:1 nos aparelhos altos e 2.5:1 nos curtos.
+
+Então o herói passou a rolar em qualquer telefone, como os atos 1 e 2 já faziam
+abaixo de 640px. A amostra virou `aspect-ratio: 4/3` com teto em `min(44vh,
+20rem)` e largura máxima de 26rem — no telefone o teto não morde, no tablet
+evita que a foto vire cartaz. As alturas foram de 149/140/113/108px para
+279/263/253/243px. A lede voltou a aparecer em aparelho curto, já que não
+precisa mais ceder espaço.
+
+O preço, assumido: o botão do DTF UV deixou de caber na primeira tela e fica a
+um empurrão de distância.
+
+**A divisória teve que mudar junto.** Com o ato rolando, a costura entre as duas
+faixas anda com o dedo, e medi-la uma vez por troca de parada deixava a
+divisória até 59 pontos percentuais fora do lugar — a ficha do têxtil caindo
+sobre o chão azul do UV (`lab/seam.mjs`). Medir a cada quadro já tinha sido
+tentado e revertido por custo; desta vez o custo foi atacado na raiz. Não era a
+transição de 720ms: era o fato de `--split` ser herdado e morar no `<body>`, de
+modo que cada escrita recalculava o estilo do documento inteiro, e esta página
+tem centenas de spans vindos dos títulos cinéticos. O valor por quadro agora vai
+num `--seam` escrito direto em `.world__uv` e `.rail`, lido como
+`var(--seam, var(--split))`, e `body[data-seam]` desliga a transição enquanto
+isso dura. Resultado: a divisória acompanha o conteúdo em 390, 360, 320 e 768, e
+o p95 caiu de 35ms para 28ms — abaixo do que estava publicado.
 
 ## Telas muito curtas (18/11/2026)
 

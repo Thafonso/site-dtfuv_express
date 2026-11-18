@@ -16,6 +16,9 @@
   var acts    = Array.prototype.slice.call(document.querySelectorAll('.act'));
   var links   = Array.prototype.slice.call(document.querySelectorAll('[data-stop-link]'));
   var peakAct = document.getElementById('aplicacao');
+  /* os dois únicos elementos que consomem a divisória; ver --seam em site.css */
+  var splitEls = [document.querySelector('.world__uv'), document.querySelector('.rail')]
+    .filter(Boolean);
 
   /* A página tem 6 atos. O pico (a aplicação) é o 3º: é ele que dirige a
      divisória sozinho, e é a partir do 4º que os dois mundos se fundem. */
@@ -81,13 +84,19 @@
     if (!narrow.matches) return false;
     var seam = seamOf(acts[n - 1]);
     if (seam === null) return false;
-    /* escrever a mesma coisa todo quadro invalidaria o estilo da página
-       inteira à toa; só vale a pena quando a costura realmente andou */
-    if (Math.abs(seam - lastSeam) > 0.15) {
+    /* direto nos dois elementos, não no <body>: --split herda e mexer nele no
+       body recalcularia o estilo do documento inteiro a cada quadro */
+    if (Math.abs(seam - lastSeam) > 0.4) {
       lastSeam = seam;
-      body.style.setProperty('--split', seam.toFixed(2) + '%');
+      var v = seam.toFixed(2) + '%';
+      for (var i = 0; i < splitEls.length; i++) splitEls[i].style.setProperty('--seam', v);
     }
     return true;
+  }
+
+  function clearSeam() {
+    lastSeam = -1;
+    for (var i = 0; i < splitEls.length; i++) splitEls[i].style.removeProperty('--seam');
   }
 
   /* ---- 2 · o cap acompanha a linha, sem sair da tela ------------------- */
@@ -224,9 +233,26 @@
   var queued = false;
   var settling = false;
 
+  var seaming = false;
+
   function frame() {
     queued = false;
     applyStop(currentStop());
+
+    /* Nos dois primeiros atos do telefone a divisória mora na costura entre as
+       duas faixas, e esses atos rolam: medir uma vez por parada deixava a
+       divisória até 59 pontos percentuais fora do lugar (lab/_seam), com a
+       ficha do têxtil caindo sobre o chão azul do UV. Aqui ela é medida a cada
+       quadro — barato porque `data-seam` desliga a transição de 720ms, que era
+       o que custava caro. */
+    var wantSeam = narrow.matches && (stop === 1 || stop === 2);
+    if (wantSeam !== seaming) {
+      seaming = wantSeam;
+      if (wantSeam) body.setAttribute('data-seam', '');
+      else        { body.removeAttribute('data-seam'); clearSeam(); }
+    }
+    if (wantSeam) applySeam(stop);
+
     drivePeak();
     if (dragging || dragOffset !== 0) schedule();   /* mola de volta */
   }
