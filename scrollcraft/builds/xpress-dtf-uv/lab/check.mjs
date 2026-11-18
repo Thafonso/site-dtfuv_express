@@ -3,7 +3,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const URL = pathToFileURL('C:/Users/thiag/.vscode/upside/site-express/index.html').href;
 const OUT = process.argv[2];
-const VIEWS = [[1440, 900, 'desktop'], [1280, 800, 'laptop'], [768, 1024, 'tablet'], [390, 844, 'phone'], [360, 740, 'phone-s']];
+const VIEWS = [[1440, 900, 'desktop'], [1280, 800, 'laptop'], [768, 1024, 'tablet'], [390, 844, 'phone'], [360, 740, 'phone-s'], [320, 568, 'phone-xs']];
 
 const b = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
 

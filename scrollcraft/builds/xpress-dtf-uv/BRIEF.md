@@ -281,13 +281,19 @@ disso, então a página também não.
 
 ## Imagens do têxtil
 
-Vieram do próprio site do cliente, a pedido dele, e só imagens:
+Duas vieram do próprio site do cliente, a pedido dele, e só imagens. A do
+herói o cliente entregou depois, direto.
 
-- `assets/dtf-textil-aplicada.webp` — recorte largo da foto do banner
-  `banners/banner-31794319.webp`: estampa azul em tecido preto com o filme
-  saindo. É a amostra do herói.
-- `assets/dtf-textil-prensa.webp` — recorte maior da mesma foto, com a mão.
-  É a prova do ato da aplicação.
+- `assets/dtf-textil-camiseta.webp` — foto de um trabalho entregue pela gráfica,
+  dada pelo cliente em `images/dtf textil.jpeg` (18/11/2026). Recorte 4/3 da
+  fonte 1204x1600 (box 52,140,1152,965), reduzido para 920x690. É a amostra do
+  herói. Substituiu `dtf-textil-aplicada.webp`, recorte do banner do site, que
+  mostrava sobretudo o antebraço de quem puxava o filme. Como a foto é retrato e
+  a faixa do mobile é 5/2 (6/2 em tela baixa), `.shot--tx img` ancora pelo topo:
+  é o que mantém a estampa legível em vez de cortá-la no meio das letras.
+- `assets/dtf-textil-prensa.webp` — `banners/banner-31794319.webp` do site:
+  estampa azul em tecido preto com o filme saindo pela mão. É a prova do ato
+  da aplicação.
 - `assets/dtf-textil.webp` — `produtos/large/3_1fz1nf9392wqz3etwgwtf.jpg`
   (camisetas clara e escura ao lado do rolo), aparada e ampliada. É a placa do
   ato da comparação.
@@ -298,6 +304,58 @@ outras placas da página.
 
 ## Verificação
 
-`lab/check.mjs` (geometria em 5 telas), `lab/sheet.mjs` (percurso em 15 quadros)
-e `lab/final.mjs` (títulos cinéticos, movimento reduzido, arraste do destaque,
-ordem de tabulação). Rodam direto no `index.html` por `file://`, sem servidor.
+`lab/check.mjs` (geometria em 6 telas, de 1440x900 a 320x568), `lab/sheet.mjs`
+(percurso em 15 quadros), `lab/final.mjs` (títulos cinéticos, movimento
+reduzido, arraste do destaque, ordem de tabulação), `lab/overflow.mjs` (quem
+empurra a página para os lados) e `lab/perf.mjs` (fluidez da rolagem a 390x844
+com a CPU afunilada 4x, pela mediana de várias passadas — uma passada só varia
+demais para comparar duas versões). Rodam direto no `index.html` por `file://`,
+sem servidor.
+
+`lab/urlbar.mjs` é o mais específico: reproduz a barra de endereço do celular
+deslizando. Emular isso encolhendo a janela não serve, porque sem barra de
+verdade encolher muda também `vh`, `lvh` e a altura dos atos, o que no telefone
+não acontece. O que o telefone faz é mais estreito — `innerHeight` passa a
+devolver outro número e dispara um `resize`, com o layout parado — e é isso que
+o teste faz, em nove pontos da página.
+
+## A travada no celular (18/11/2026)
+
+O cliente relatou "uma leve travada" no telefone. Não era taxa de quadros: a
+mediana a 390x844 com a CPU 4x mais lenta já era 17ms. Era um pulo de estado.
+
+`site.js` lia `window.innerHeight` ao vivo em `currentStop`, `actProgress` e
+`seamOf`. No telefone esse número muda ~90px sozinho toda vez que a barra de
+endereço desliza, e a página reagia como se o leitor tivesse rolado: a parada
+corrente trocava, a divisória atravessava a tela e o destaque do filme saltava.
+O motor já ignora essas mudanças de propósito (scrollcraft.js, "Ignore
+URL-bar-only height changes on phones"); a camada do site é que não seguia a
+regra. Agora a altura de referência é medida uma vez em `100lvh` — o viewport
+grande, o mesmo de que o CSS parte para dimensionar os atos — e só é remedida
+quando a largura muda. `lab/urlbar.mjs`: 6 pontos pulavam, nenhum pula.
+
+Junto saíram dois desfoques que não apareciam e só cobravam: o `.cap` no celular
+tem fundo 93% opaco e o menu 96%, e os dois ainda rodavam `backdrop-filter` a
+cada quadro de rolagem. O véu do filme perdeu o desfoque só no telefone, onde
+ele anda com o `clip-path` a cada quadro; o gradiente ficou um pouco mais denso
+no lugar.
+
+**Tentado e revertido:** medir a costura da divisória a cada quadro. Escrever
+`--split` no `body` todo quadro reinicia a transição de 720ms de `.world__uv`,
+e o p95 foi de 35ms para 118ms. A medição por troca de parada basta — conferido
+em 320x568, a divisória acompanha o conteúdo.
+
+## Telas muito curtas (18/11/2026)
+
+Abaixo de 640px de altura (320x568, e qualquer telefone deitado) a composição em
+duas faixas não cabia: meia tela dá ~240px, o herói precisava de ~213px por lado
+e o botão do DTF UV saía da tela, e as quatro fichas do ato 2 pediam ~290px por
+lado. Espremer tipografia não fechava a conta e esconder uma ficha seria tirar
+informação de quem está decidindo. Nessas alturas os atos 1 e 2 deixam de ser
+painéis fixos e passam a rolar, como o ato 6 já fazia: nada escondido, nada
+cortado. O pico continua fixo — é ele que justifica a página.
+
+O palco solto fica `position: relative`, não `static`: as placas de profundidade
+do herói são absolutas e sangram de propósito (`inset: -12% -6%`). Com o palco
+estático elas passam a se posicionar pelo `<section>`, escapam do recorte e a
+página ganha rolagem lateral — foi o que `lab/overflow.mjs` apontou.

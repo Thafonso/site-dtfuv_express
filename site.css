@@ -327,7 +327,9 @@ body[data-peak] .cap { transition: none; }
   box-shadow: 0 22px 40px rgba(0,0,0,.5);
 }
 .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.shot--tx img { object-position: 30% 50%; }
+/* A foto da camiseta é retrato: na faixa larga do mobile, ancorar pelo topo é o
+   que mantém a estampa legível em vez de cortá-la no meio das letras. */
+.shot--tx img { object-position: 50% 0%; }
 .shot--uv { border-color: var(--uv-line); }
 .shot--uv img { object-position: 50% 30%; filter: saturate(.92); }
 
@@ -642,6 +644,10 @@ body[data-dragged] .peel__hint { opacity: 0; }
     /* como barra ela tem conteúdo passando por baixo o tempo todo; a 62% o
        texto aparecia através do blur */
     background: rgba(6,18,29,.93);
+    /* e a 93% o blur não aparece mais — só cobra. É uma faixa fixa da largura
+       inteira, então o telefone refazia esse desfoque a cada quadro de
+       rolagem, pelo nada. */
+    backdrop-filter: none; -webkit-backdrop-filter: none;
   }
   .cap__mark { margin-right: auto; }
   .cap__cta { padding: .55rem .95rem; font-size: .8125rem; }
@@ -660,8 +666,7 @@ body[data-dragged] .peel__hint { opacity: 0; }
   .stops {
     left: 0; right: 0; top: 0; transform: none;
     padding: 4.2rem clamp(1rem, 5vw, 1.6rem) 1.4rem;
-    background: rgba(6,18,29,.96);
-    backdrop-filter: blur(16px);
+    background: rgba(6,18,29,.96);   /* opaco o bastante para dispensar blur */
     border-bottom: 1px solid var(--uv-line);
     visibility: hidden; opacity: 0;
     transition: opacity 200ms ease-out, visibility 0s linear 200ms;
@@ -716,6 +721,15 @@ body[data-dragged] .peel__hint { opacity: 0; }
   .proof figcaption { font-size: .6875rem; }
   /* no telefone a dobra tem menos espaço lateral, então ela abre menos */
   .peel__panel { aspect-ratio: 3 / 2; }
+  /* O véu do filme é a única coisa da página que desfoca o fundo enquanto se
+     move: o clip-path anda a cada quadro e o desfoque é refeito junto. No
+     telefone o ganho de 1.8px não paga o custo, então o gradiente assume
+     sozinho, um pouco mais denso para compensar. */
+  .peel__haze {
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+    background:
+      linear-gradient(104deg, rgba(226,240,252,.3) 0%, rgba(196,222,246,.2) 42%, rgba(226,240,252,.3) 100%);
+  }
   .peel__flap { transform: perspective(900px) rotateY(calc(78deg * var(--peel))) scaleX(var(--peel)); }
   .peel__hint { margin-top: .7rem; font-size: .6875rem; }
 
@@ -757,6 +771,37 @@ body[data-dragged] .peel__hint { opacity: 0; }
   .foot__cols { gap: .9rem 1.2rem; }
   .foot__cols p, .foot__cols ul { font-size: .8125rem; }
   .foot__cols h3 { margin-bottom: .45rem; }
+}
+
+/* Aparelho muito curto (320x568, e qualquer telefone deitado): abaixo daqui a
+   composição em duas faixas simplesmente não cabe. Meia tela dá ~240px, e o
+   herói precisava de ~213px por lado — o botão do DTF UV saía da tela — e as
+   quatro fichas do ato 2 pediam ~290px por lado. Espremer tipografia não
+   fecha essa conta, e esconder uma ficha seria tirar informação de quem está
+   decidindo.
+   Então os dois primeiros atos deixam de ser painéis fixos e passam a rolar,
+   como o ato 6 já faz: nada é escondido, nada é cortado, só deixa de ser
+   espremido. O pico continua fixo — é ele que justifica a página. */
+@media (max-width: 860px) and (max-height: 640px) {
+  .act--1, .act--2 { height: auto !important; }
+  .act--1 .sc-stage, .act--2 .sc-stage {
+    /* `relative`, não `static`: as placas de profundidade do herói são
+       absolutas e sangram de propósito (inset negativo). Com o palco estático
+       elas passariam a se posicionar pelo <section> e escapariam do recorte,
+       dando rolagem lateral. Relativo ele sai do sticky mas continua sendo o
+       bloco de contenção que as segura. */
+    position: relative; height: auto; min-height: 100svh;
+    overflow-x: clip; overflow-y: visible;
+  }
+  .hero { grid-template-rows: auto auto; height: auto; }
+  .duo, .duo--hero { grid-template-rows: auto auto; height: auto; }
+  .side--a, .side--b { justify-content: start; }
+
+  /* com a rolagem liberada, a amostra volta a ter altura de foto */
+  .shot { aspect-ratio: 5 / 3; max-width: 17rem; }
+  .duo--hero .side__inner { gap: .6rem; }
+  .act--2 .side--a { padding-top: calc(var(--cap-h) + 1.2rem); }
+  .act--2 .side--b { padding-bottom: 1.6rem; }
 }
 
 @media (max-width: 420px) {

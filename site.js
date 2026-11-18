@@ -24,6 +24,37 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   var narrow  = window.matchMedia('(max-width: 860px)');
 
+  /* ---- 0 · a altura de referência -------------------------------------- */
+
+  /* No telefone a barra de endereço some e volta durante a rolagem: a largura
+     não muda, a altura sim, uns 90px. Quem lê `innerHeight` a cada quadro vê
+     esse número mudar sozinho e reage como se o leitor tivesse rolado — a
+     parada corrente troca, o destaque do filme salta, a divisória atravessa a
+     tela. O motor já ignora essas mudanças de propósito (scrollcraft.js,
+     "Ignore URL-bar-only height changes on phones"); esta camada tem que
+     seguir a mesma regra.
+
+     A altura que vale é a do viewport grande, com a barra escondida: é dela
+     que o CSS parte para dimensionar os atos em `vh`, então é com ela que o
+     progresso tem que ser medido. `lvh` dá esse número e, por definição, não
+     oscila com a barra. Sem suporte a `lvh`, sobra `innerHeight`, e aí o
+     guarda de largura no resize evita o pior. */
+  var vh = 0;
+  var lastW = 0;
+
+  function measureVh() {
+    lastW = window.innerWidth;
+    var probe = document.createElement('div');
+    probe.style.cssText =
+      'position:absolute;top:0;left:0;width:0;height:100lvh;visibility:hidden;pointer-events:none';
+    document.body.appendChild(probe);
+    var h = probe.offsetHeight;
+    probe.parentNode.removeChild(probe);
+    vh = h > 0 ? h : window.innerHeight;
+  }
+
+  measureVh();
+
   /* ---- 1 · a divisória: posição de base por parada --------------------- */
 
   /* a posição de onde o pico começa a fechar a divisória: a mesma do ato 2,
@@ -40,15 +71,22 @@
     var b = actEl && actEl.querySelector('.side--b');
     if (!b) return null;
     var top = b.getBoundingClientRect().top;
-    if (top <= 0 || top >= window.innerHeight) return null;
-    return (top / window.innerHeight) * 100;
+    if (top <= 0 || top >= vh) return null;
+    return (top / vh) * 100;
   }
+
+  var lastSeam = -1;
 
   function applySeam(n) {
     if (!narrow.matches) return false;
     var seam = seamOf(acts[n - 1]);
     if (seam === null) return false;
-    body.style.setProperty('--split', seam.toFixed(2) + '%');
+    /* escrever a mesma coisa todo quadro invalidaria o estilo da página
+       inteira à toa; só vale a pena quando a costura realmente andou */
+    if (Math.abs(seam - lastSeam) > 0.15) {
+      lastSeam = seam;
+      body.style.setProperty('--split', seam.toFixed(2) + '%');
+    }
     return true;
   }
 
@@ -69,7 +107,7 @@
   var stop = 0;
 
   function currentStop() {
-    var line = window.innerHeight * 0.5;
+    var line = vh * 0.5;
     var n = 1;
     for (var i = 0; i < acts.length; i++) {
       if (acts[i].getBoundingClientRect().top <= line) n = i + 1;
@@ -113,7 +151,7 @@
   }
 
   function actProgress(el) {
-    var travel = el.offsetHeight - window.innerHeight;
+    var travel = el.offsetHeight - vh;
     if (travel <= 1) return 0;
     var p = -el.getBoundingClientRect().top / travel;
     return p < 0 ? 0 : p > 1 ? 1 : p;
@@ -201,10 +239,13 @@
 
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', function () {
+    /* Largura igual no telefone: foi só a barra de endereço. Nada a refazer. */
+    if (narrow.matches && window.innerWidth === lastW) { schedule(); return; }
+    measureVh();
     placeCap(parseFloat(getComputedStyle(body).getPropertyValue('--split')) || 50);
     if (stop === 1 || stop === 2) applySeam(stop);
     schedule();
-  });
+  }, { passive: true });
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(function () { if (stop === 1 || stop === 2) applySeam(stop); });
   }
