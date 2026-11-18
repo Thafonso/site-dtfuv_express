@@ -1,0 +1,9 @@
+# O site publicado é só a raiz: index.html, site.css, site.js, favicon.svg,
+# o motor scrollcraft e assets/. Tudo abaixo é material de trabalho e não
+# precisa subir para a Vercel.
+
+scrollcraft/
+images/
+claude.md
+CLAUDE.md
+**/node_modules/

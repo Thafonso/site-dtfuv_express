@@ -24,14 +24,14 @@
         {
           "t": "Adesivo comum Vinil impressoe recortado ",
           "dir": "light-on-dark",
-          "worst": 11.85,
+          "worst": 11.88,
           "mean": 12.39
         },
         {
           "t": "DTF UV Sua marca em vidro, metal e madei",
           "dir": "light-on-dark",
-          "worst": 10.7,
-          "mean": 13.13
+          "worst": 10.6,
+          "mean": 13.14
         },
         {
           "t": "À primeira vista, parecem iguais.",
@@ -97,7 +97,7 @@
           "t": "À primeira vista, parecem iguais.",
           "dir": "light-on-dark",
           "worst": 13.74,
-          "mean": 14.04
+          "mean": 14.08
         }
       ],
       "cues": [
@@ -157,7 +157,7 @@
           "t": "À primeira vista, parecem iguais.",
           "dir": "light-on-dark",
           "worst": 13.74,
-          "mean": 14
+          "mean": 14.05
         }
       ],
       "cues": [
@@ -211,13 +211,13 @@
           "t": "DTF UV Sua marca em vidro, metal e madei",
           "dir": "light-on-dark",
           "worst": 11.18,
-          "mean": 13.9
+          "mean": 13.91
         },
         {
           "t": "À primeira vista, parecem iguais.",
           "dir": "light-on-dark",
           "worst": 13.74,
-          "mean": 14.04
+          "mean": 14.07
         }
       ],
       "cues": [
@@ -271,7 +271,7 @@
           "t": "DTF UV Sua marca em vidro, metal e madei",
           "dir": "light-on-dark",
           "worst": 11.52,
-          "mean": 14.18
+          "mean": 14.19
         },
         {
           "t": "À primeira vista, parecem iguais.",
@@ -330,7 +330,7 @@
         {
           "t": "DTF UV Sua marca em vidro, metal e madei",
           "dir": "light-on-dark",
-          "worst": 11.96,
+          "worst": 12.07,
           "mean": 14.47
         }
       ],
