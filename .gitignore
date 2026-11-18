@@ -3,3 +3,5 @@
 
 #Claude files
 claude.md
+#Config local do Claude Code (permissoes da maquina)
+.claude/settings.local.json

@@ -228,3 +228,76 @@ Não verificado: telefone de verdade. Chrome headless não reproduz o decodifica
 a política de autoplay nem o scroll por toque de um aparelho real. A página não
 tem vídeo nenhum, o que remove o modo de falha mais comum, mas o gesto de arraste
 em tela sensível ao toque só pode ser confirmado no aparelho.
+
+---
+
+# ADENDO v2 — duas técnicas, duas portas (18/11/2026)
+
+O cliente pediu três coisas: encurtar a página, acrescentar o **DTF têxtil** e
+dar **um CTA para cada produto**. Isso derruba a premissa do v1.
+
+## O que mudou de premissa
+
+No v1 a divisória comparava **adesivo de vinil × DTF UV**: um lado perdia.
+Com o têxtil no escopo, o lado esquerdo deixa de ser o concorrente e passa a
+ser **o outro produto da casa**. A mesma máquina de palco dividido continua
+valendo, mas agora os dois lados são da Xpress, então os dois ganham acento
+próprio — o azul da marca no UV, um laranja de prensa no têxtil — e o colapso
+no fim significa "uma gráfica", não "um vencedor".
+
+## Estrutura: 8 atos → 6
+
+| v1 | v2 |
+|---|---|
+| 1 Os dois · 2 Superfícies · 3 Camadas · 4 Uso real | 1 Herói de duas portas · 2 Comparação ponto a ponto |
+| 5 Aplicação (span 4.2) | 3 Aplicação (span 2.4) |
+| 6 Como pedir · 7 Dúvidas (10 perguntas) | 4 Como pedir · 5 Dúvidas (7 perguntas) |
+| 8 Presença | 6 Orçamento, com os dois botões |
+
+Atos fixados: 11,1 → 6,4 alturas de tela. A página inteira mede **7,9 telas no
+desktop** (eram ~14,5) e 9,1 no telefone.
+
+## Os dois CTA
+
+Cada produto tem o seu, no herói e na placa final, cada um com a mensagem já
+escrita no WhatsApp ("orçamento de DTF têxtil" / "de DTF UV"). O botão do
+chrome deixou de apontar para o WhatsApp do UV e passa a levar à placa final,
+onde a escolha é do visitante.
+
+## Fatos novos, e de onde vêm
+
+Lidos em xpressimpressoes.com.br em 18/11/2026. Nada aqui é inventado.
+
+| Fato | Origem |
+|---|---|
+| Filme termo transfer, látex e poliamida (TPU), prensagem quente | descrição de /produto/filme-txtil-58x100 |
+| Tecidos claros e escuros; "transfers por metro"; confecção | texto institucional do rodapé do site |
+| Têxtil 58 cm de largura; 25, 50, 75 e 100 cm | catálogo: filme-txtil-58x25 / 58x50 / 58x75 / 58x100 |
+| Produção em 1 dia útil + entrega, também no têxtil | ficha do produto têxtil |
+
+**Não afirmado:** temperatura, tempo e pressão da prensa; durabilidade em
+lavagens; comparação de preço entre as duas técnicas. O site não publica nada
+disso, então a página também não.
+
+## Imagens do têxtil
+
+Vieram do próprio site do cliente, a pedido dele, e só imagens:
+
+- `assets/dtf-textil-aplicada.webp` — recorte largo da foto do banner
+  `banners/banner-31794319.webp`: estampa azul em tecido preto com o filme
+  saindo. É a amostra do herói.
+- `assets/dtf-textil-prensa.webp` — recorte maior da mesma foto, com a mão.
+  É a prova do ato da aplicação.
+- `assets/dtf-textil.webp` — `produtos/large/3_1fz1nf9392wqz3etwgwtf.jpg`
+  (camisetas clara e escura ao lado do rolo), aparada e ampliada. É a placa do
+  ato da comparação.
+
+O recorte do fundo branco foi tentado e descartado: a camiseta branca é branca
+sobre branco, e o preenchimento comia a gola. A foto fica emoldurada, como as
+outras placas da página.
+
+## Verificação
+
+`lab/check.mjs` (geometria em 5 telas), `lab/sheet.mjs` (percurso em 15 quadros)
+e `lab/final.mjs` (títulos cinéticos, movimento reduzido, arraste do destaque,
+ordem de tabulação). Rodam direto no `index.html` por `file://`, sem servidor.

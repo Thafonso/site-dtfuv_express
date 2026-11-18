@@ -1,5 +1,5 @@
 /* ============================================================================
-   Xpress · DTF UV — comportamento próprio da página.
+   Xpress · DTF têxtil + DTF UV — comportamento próprio da página.
    O motor (scrollcraft.js) não é tocado. Tudo aqui lê posição de scroll e
    escreve apenas custom properties, transform e opacity.
    ========================================================================= */
@@ -17,15 +17,40 @@
   var links   = Array.prototype.slice.call(document.querySelectorAll('[data-stop-link]'));
   var peakAct = document.getElementById('aplicacao');
 
+  /* A página tem 6 atos. O pico (a aplicação) é o 3º: é ele que dirige a
+     divisória sozinho, e é a partir do 4º que os dois mundos se fundem. */
+  var PEAK_STOP = 3;
+
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   var narrow  = window.matchMedia('(max-width: 860px)');
 
   /* ---- 1 · a divisória: posição de base por parada --------------------- */
 
-  var BASE_WIDE   = 31;   /* % — mesmo valor de body[data-stop="4"] em site.css */
-  var BASE_NARROW = 34;
+  /* a posição de onde o pico começa a fechar a divisória: a mesma do ato 2,
+     que é o ato imediatamente anterior */
+  var BASE_WIDE   = 42;   /* % — mesmo valor de body[data-stop="2"] em site.css */
+  var BASE_NARROW = 46;
 
   function baseSplit() { return narrow.matches ? BASE_NARROW : BASE_WIDE; }
+
+  /* No telefone os dois lados viram duas faixas empilhadas. A divisória só faz
+     sentido na costura entre elas, que depende da altura real do texto, então
+     ela é medida, não arbitrada. */
+  function seamOf(actEl) {
+    var b = actEl && actEl.querySelector('.side--b');
+    if (!b) return null;
+    var top = b.getBoundingClientRect().top;
+    if (top <= 0 || top >= window.innerHeight) return null;
+    return (top / window.innerHeight) * 100;
+  }
+
+  function applySeam(n) {
+    if (!narrow.matches) return false;
+    var seam = seamOf(acts[n - 1]);
+    if (seam === null) return false;
+    body.style.setProperty('--split', seam.toFixed(2) + '%');
+    return true;
+  }
 
   /* ---- 2 · o cap acompanha a linha, sem sair da tela ------------------- */
 
@@ -56,19 +81,20 @@
     if (n === stop) return;
     stop = n;
     body.setAttribute('data-stop', String(n));
-    if (n >= 6) body.setAttribute('data-resolved', '');
-    else        body.removeAttribute('data-resolved');
+    if (n >= PEAK_STOP + 1) body.setAttribute('data-resolved', '');
+    else                    body.removeAttribute('data-resolved');
 
-    var active = Math.min(n, 7);
+    var active = Math.min(n, 5);
     for (var i = 0; i < links.length; i++) {
       var on = Number(links[i].getAttribute('data-stop-link')) === active;
       if (on) links[i].setAttribute('aria-current', 'true');
       else    links[i].removeAttribute('aria-current');
     }
 
-    if (n === 5) return;                 /* o ato 5 dirige a divisória sozinho */
+    if (n === PEAK_STOP) return;         /* o pico dirige a divisória sozinho */
     body.style.removeProperty('--split');
-    var map = { 1: 50, 2: 44, 3: 38, 4: baseSplit(), 6: 0, 7: 0, 8: 0 };
+    if ((n === 1 || n === 2) && applySeam(n)) { placeCap(0); return; }
+    var map = { 1: 50, 2: baseSplit(), 4: 0, 5: 0, 6: 0 };
     placeCap(narrow.matches ? 0 : (map[n] !== undefined ? map[n] : 0));
   }
 
@@ -110,7 +136,7 @@
     peel = peel < 0 ? 0 : peel > 0.78 ? 0.78 : peel;
     peelEl.style.setProperty('--peel', peel.toFixed(4));
 
-    if (stop === 5) {
+    if (stop === PEAK_STOP) {
       var collapse = smooth(p, 0.56, 0.94);
       var split = baseSplit() * (1 - collapse);
       body.style.setProperty('--split', split.toFixed(2) + '%');
@@ -176,8 +202,12 @@
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', function () {
     placeCap(parseFloat(getComputedStyle(body).getPropertyValue('--split')) || 50);
+    if (stop === 1 || stop === 2) applySeam(stop);
     schedule();
   });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { if (stop === 1 || stop === 2) applySeam(stop); });
+  }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
 
   stop = 0;
