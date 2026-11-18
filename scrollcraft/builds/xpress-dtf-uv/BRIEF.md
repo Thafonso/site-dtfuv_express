@@ -308,8 +308,8 @@ outras placas da página.
 (percurso em 15 quadros), `lab/final.mjs` (títulos cinéticos, movimento
 reduzido, arraste do destaque, ordem de tabulação), `lab/overflow.mjs` (quem
 empurra a página para os lados), `lab/hero.mjs` (quanto espaço sobra para a
-amostra em cada telefone), `lab/seam.mjs` (se a divisória está onde o conteúdo
-diz que ela deveria estar) e `lab/perf.mjs` (fluidez da rolagem a 390x844
+amostra em cada telefone), `lab/seam.mjs` (se a fronteira entre os dois chãos é
+o próprio limite do bloco, sem divisória concorrente por cima) e `lab/perf.mjs` (fluidez da rolagem a 390x844
 com a CPU afunilada 4x, pela mediana de várias passadas — uma passada só varia
 demais para comparar duas versões). Rodam direto no `index.html` por `file://`,
 sem servidor.
@@ -366,18 +366,35 @@ precisa mais ceder espaço.
 O preço, assumido: o botão do DTF UV deixou de caber na primeira tela e fica a
 um empurrão de distância.
 
-**A divisória teve que mudar junto.** Com o ato rolando, a costura entre as duas
-faixas anda com o dedo, e medi-la uma vez por troca de parada deixava a
-divisória até 59 pontos percentuais fora do lugar — a ficha do têxtil caindo
-sobre o chão azul do UV (`lab/seam.mjs`). Medir a cada quadro já tinha sido
-tentado e revertido por custo; desta vez o custo foi atacado na raiz. Não era a
-transição de 720ms: era o fato de `--split` ser herdado e morar no `<body>`, de
-modo que cada escrita recalculava o estilo do documento inteiro, e esta página
-tem centenas de spans vindos dos títulos cinéticos. O valor por quadro agora vai
-num `--seam` escrito direto em `.world__uv` e `.rail`, lido como
-`var(--seam, var(--split))`, e `body[data-seam]` desliga a transição enquanto
-isso dura. Resultado: a divisória acompanha o conteúdo em 390, 360, 320 e 768, e
-o p95 caiu de 35ms para 28ms — abaixo do que estava publicado.
+**A divisória teve que mudar junto, e em duas rodadas.** Com o ato rolando, a
+costura entre as duas faixas anda com o dedo, e medi-la uma vez por troca de
+parada deixava a divisória até 59 pontos percentuais fora do lugar. A primeira
+tentativa foi medir a cada quadro e escrever num `--seam` nos dois elementos que
+a consomem, em vez de no `<body>` — porque `--split` é herdado e mexer nele no
+body recalcula o estilo do documento inteiro, e esta página tem centenas de
+spans vindos dos títulos cinéticos. Nos testes fechou: divisória colada ao
+conteúdo e p95 de 28ms.
+
+**No iPhone não fechou.** O cliente mandou a foto: a linha azul acima do botão
+do DTF têxtil, e "travando muito" ao rolar. Os dois sintomas são a mesma causa,
+e nenhum teste em Chrome headless pegaria. No iOS um elemento `position: fixed`
+não acompanha a rolagem por inércia quadro a quadro: a divisória, dirigida por
+JS, ficava para trás do conteúdo. Por melhor que seja a medição, ela chega
+atrasada na tela.
+
+A correção foi tirar a divisória da mão do JS nesses dois atos: **cada faixa
+passou a carregar o próprio chão** (`.act--1/.act--2 .sc-stage` com o chão do
+têxtil, `.side--b` com o do UV e o fio de luz no `::before` da sua borda), e o
+chão global e o fio fixo saem de cena enquanto esses atos estão na tela. A
+fronteira deixa de ser calculada e passa a ser o próprio limite do bloco: está
+certa por construção, em qualquer altura de tela, e não tem o que atrasar. Com
+isso saíram do `site.js` a medição da costura, o `--seam` e todo o trabalho de
+divisória por quadro — o p95 foi de 35ms (publicado) para **24ms**, o melhor da
+série. O chão global continua valendo do pico em diante.
+
+**Lição para este projeto:** divisória fixa dirigida por JS e rolagem por
+inércia no iOS não convivem. Onde a fronteira coincide com um limite de bloco,
+pintar o bloco é mais barato e mais correto do que persegui-lo.
 
 ## Telas muito curtas (18/11/2026)
 

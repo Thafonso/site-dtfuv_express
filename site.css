@@ -7,14 +7,6 @@
    ========================================================================= */
 
 @property --split { syntax: '<percentage>'; inherits: true; initial-value: 50%; }
-/* --seam é o mesmo valor, mas escrito direto em .world__uv e .rail em vez de
-   no <body>. --split herda, então mexer nele no body recalcula o estilo do
-   documento inteiro — e esta página tem centenas de spans, dos títulos
-   cinéticos. Por parada isso não custa nada; a cada quadro, como o telefone
-   precisa nos atos que rolam, levava o p95 de 35ms para 125ms. Propositalmente
-   não registrado com @property: sem registro ele é inválido-por-garantia
-   quando não está setado, e `var(--seam, var(--split))` cai no valor por
-   parada sozinho. */
 @property --peel  { syntax: '<number>';     inherits: true; initial-value: 0; }
 
 /* ---------- 1 · tokens ---------------------------------------------------- */
@@ -93,7 +85,7 @@ body {
 }
 
 .world__uv {
-  transform: translateX(var(--seam, var(--split)));
+  transform: translateX(var(--split));
   transition: transform 720ms cubic-bezier(.23,1,.32,1);
   will-change: transform;
   background:
@@ -105,21 +97,13 @@ body {
 
 body[data-peak] .world__uv { transition: none; }
 
-/* No telefone os dois primeiros atos rolam, então a divisória tem que andar
-   colada na costura entre as duas faixas, quadro a quadro. Com a transição de
-   720ms ligada, cada escrita de --split reiniciaria a animação e a rolagem
-   engasgava (p95 de 35ms para 118ms, medido); aqui ela sai, do mesmo jeito que
-   já sai no pico, e a divisória passa a seguir o conteúdo direto. */
-body[data-seam] .world__uv { transition: none; }
-body[data-seam] .rail      { transition: opacity 420ms ease-out; }
-
 /* ---------- 3 · chrome: a divisória, o cap e o índice -------------------- */
 
 .rail {
   position: fixed; inset: 0; width: 100%;
   z-index: var(--sc-z-chrome, 60);
   pointer-events: none;
-  transform: translateX(var(--seam, var(--split)));
+  transform: translateX(var(--split));
   transition: transform 720ms cubic-bezier(.23,1,.32,1), opacity 420ms ease-out;
   will-change: transform;
 }
@@ -642,16 +626,48 @@ body[data-dragged] .peel__hint { opacity: 0; }
   }
 
   .world__uv {
-    transform: translateY(var(--seam, var(--split)));
+    transform: translateY(var(--split));
     box-shadow: 0 -1px 0 var(--uv-line), 0 -24px 48px rgba(0,0,0,.55);
   }
   body[data-stop="1"] { --split: 52%; }
   body[data-stop="2"] { --split: 46%; }
 
-  .rail { transform: translateY(var(--seam, var(--split))); }
+  .rail { transform: translateY(var(--split)); }
   .rail__line { top: 0; bottom: auto; left: 0; right: 0; width: auto; height: 1px;
     background: linear-gradient(90deg, rgba(46,157,232,0), var(--uv-glow) 20%, var(--uv-glow) 80%, rgba(46,157,232,0)); }
   .rail__sides { display: none; }
+
+  /* ---- os dois chãos nos atos que o leitor rola -------------------------
+     Nestes dois atos a fronteira entre marrom e azul tem que ficar exatamente
+     no limite entre os dois blocos, e esse limite anda com o dedo. Dirigir um
+     elemento fixo por JS para acompanhá-lo não funciona no telefone: no iOS o
+     elemento fixo não acompanha a rolagem por inércia, então a linha azul
+     atrasava, aparecia acima do botão do DTF têxtil e a rolagem engasgava.
+
+     Aqui cada faixa carrega o próprio chão. A fronteira passa a ser o próprio
+     limite do bloco: não tem o que dirigir, o que medir nem o que atrasar, e
+     ela está certa por construção, em qualquer altura de tela. O chão global
+     continua valendo do pico em diante. */
+  .act--1 .sc-stage, .act--2 .sc-stage {
+    background:
+      radial-gradient(90% 60% at 22% 16%, rgba(240,145,60,.13) 0%, rgba(240,145,60,0) 58%),
+      linear-gradient(180deg, #1D1812 0%, #14100C 100%);
+  }
+  .act--1 .side--b, .act--2 .side--b {
+    background:
+      radial-gradient(90% 60% at 30% 18%, rgba(46,157,232,.22) 0%, rgba(46,157,232,0) 60%),
+      radial-gradient(70% 70% at 85% 95%, rgba(16,64,101,.55) 0%, rgba(16,64,101,0) 65%),
+      linear-gradient(180deg, #0A1E2E 0%, #06121D 70%, #050F18 100%);
+    box-shadow: 0 -24px 48px rgba(0,0,0,.55);
+  }
+  /* o fio de luz da divisória, agora na borda do próprio bloco */
+  .act--1 .side--b::before, .act--2 .side--b::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,
+      rgba(46,157,232,0), var(--uv-glow) 20%, var(--uv-glow) 80%, rgba(46,157,232,0));
+  }
+  /* e a divisória global sai de cena enquanto esses atos estão na tela */
+  body[data-stop="1"] .rail, body[data-stop="2"] .rail { opacity: 0; }
 
   .cap {
     left: 0; right: 0; top: 0; transform: none !important;

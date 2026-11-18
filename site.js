@@ -16,9 +16,6 @@
   var acts    = Array.prototype.slice.call(document.querySelectorAll('.act'));
   var links   = Array.prototype.slice.call(document.querySelectorAll('[data-stop-link]'));
   var peakAct = document.getElementById('aplicacao');
-  /* os dois únicos elementos que consomem a divisória; ver --seam em site.css */
-  var splitEls = [document.querySelector('.world__uv'), document.querySelector('.rail')]
-    .filter(Boolean);
 
   /* A página tem 6 atos. O pico (a aplicação) é o 3º: é ele que dirige a
      divisória sozinho, e é a partir do 4º que os dois mundos se fundem. */
@@ -67,37 +64,12 @@
 
   function baseSplit() { return narrow.matches ? BASE_NARROW : BASE_WIDE; }
 
-  /* No telefone os dois lados viram duas faixas empilhadas. A divisória só faz
-     sentido na costura entre elas, que depende da altura real do texto, então
-     ela é medida, não arbitrada. */
-  function seamOf(actEl) {
-    var b = actEl && actEl.querySelector('.side--b');
-    if (!b) return null;
-    var top = b.getBoundingClientRect().top;
-    if (top <= 0 || top >= vh) return null;
-    return (top / vh) * 100;
-  }
-
-  var lastSeam = -1;
-
-  function applySeam(n) {
-    if (!narrow.matches) return false;
-    var seam = seamOf(acts[n - 1]);
-    if (seam === null) return false;
-    /* direto nos dois elementos, não no <body>: --split herda e mexer nele no
-       body recalcularia o estilo do documento inteiro a cada quadro */
-    if (Math.abs(seam - lastSeam) > 0.4) {
-      lastSeam = seam;
-      var v = seam.toFixed(2) + '%';
-      for (var i = 0; i < splitEls.length; i++) splitEls[i].style.setProperty('--seam', v);
-    }
-    return true;
-  }
-
-  function clearSeam() {
-    lastSeam = -1;
-    for (var i = 0; i < splitEls.length; i++) splitEls[i].style.removeProperty('--seam');
-  }
+  /* No telefone os dois lados viram duas faixas empilhadas, e a divisória só
+     faz sentido na costura entre elas. Isso já não é problema desta camada:
+     nos atos 1 e 2 cada faixa carrega o próprio chão (site.css), então a
+     fronteira é o limite do bloco e está certa por construção. Medi-la aqui
+     para dirigir um elemento fixo era o que fazia a linha atrasar e engasgar
+     durante a rolagem por inércia no iOS. */
 
   /* ---- 2 · o cap acompanha a linha, sem sair da tela ------------------- */
 
@@ -140,7 +112,6 @@
 
     if (n === PEAK_STOP) return;         /* o pico dirige a divisória sozinho */
     body.style.removeProperty('--split');
-    if ((n === 1 || n === 2) && applySeam(n)) { placeCap(0); return; }
     var map = { 1: 50, 2: baseSplit(), 4: 0, 5: 0, 6: 0 };
     placeCap(narrow.matches ? 0 : (map[n] !== undefined ? map[n] : 0));
   }
@@ -233,26 +204,9 @@
   var queued = false;
   var settling = false;
 
-  var seaming = false;
-
   function frame() {
     queued = false;
     applyStop(currentStop());
-
-    /* Nos dois primeiros atos do telefone a divisória mora na costura entre as
-       duas faixas, e esses atos rolam: medir uma vez por parada deixava a
-       divisória até 59 pontos percentuais fora do lugar (lab/_seam), com a
-       ficha do têxtil caindo sobre o chão azul do UV. Aqui ela é medida a cada
-       quadro — barato porque `data-seam` desliga a transição de 720ms, que era
-       o que custava caro. */
-    var wantSeam = narrow.matches && (stop === 1 || stop === 2);
-    if (wantSeam !== seaming) {
-      seaming = wantSeam;
-      if (wantSeam) body.setAttribute('data-seam', '');
-      else        { body.removeAttribute('data-seam'); clearSeam(); }
-    }
-    if (wantSeam) applySeam(stop);
-
     drivePeak();
     if (dragging || dragOffset !== 0) schedule();   /* mola de volta */
   }
@@ -269,12 +223,9 @@
     if (narrow.matches && window.innerWidth === lastW) { schedule(); return; }
     measureVh();
     placeCap(parseFloat(getComputedStyle(body).getPropertyValue('--split')) || 50);
-    if (stop === 1 || stop === 2) applySeam(stop);
     schedule();
   }, { passive: true });
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () { if (stop === 1 || stop === 2) applySeam(stop); });
-  }
+  /* a fonte real muda a altura das linhas, e com ela a parada corrente */
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
 
   stop = 0;
