@@ -55,8 +55,11 @@
   --h-sm: clamp(1.12rem, 1.4vw, 1.45rem);
 }
 
-body[data-stop="1"] { --split: 50%; }
-body[data-stop="2"] { --split: 42%; }
+/* A divisória nasce no meio e só sai de lá no pico, onde ela fecha. Entre o
+   herói e a comparação ela fica parada: as duas técnicas dividem a tela meio a
+   meio, e ver a linha escorregar na entrada do ato 2 lia como desalinho. */
+body[data-stop="1"],
+body[data-stop="2"] { --split: 50%; }
 body[data-stop="4"],
 body[data-stop="5"],
 body[data-stop="6"] { --split: 0%; }
@@ -244,12 +247,12 @@ body[data-peak] .cap { transition: none; }
 
 .duo {
   display: grid;
-  grid-template-columns: var(--col, 50%) 1fr;
+  /* as duas colunas encostam na divisória, que mora no meio da tela */
+  grid-template-columns: 50% 1fr;
   align-items: center;
   height: 100%;
   width: 100%;
 }
-.act--2 .duo { --col: 42%; }
 .act--2 .side--a { padding-left: var(--gutter-l); }
 .act--2 .side--a .side__inner,
 .act--2 .side--b .side__inner { max-width: 27rem; }
@@ -629,8 +632,8 @@ body[data-dragged] .peel__hint { opacity: 0; }
     transform: translateY(var(--split));
     box-shadow: 0 -1px 0 var(--uv-line), 0 -24px 48px rgba(0,0,0,.55);
   }
-  body[data-stop="1"] { --split: 52%; }
-  body[data-stop="2"] { --split: 46%; }
+  body[data-stop="1"],
+  body[data-stop="2"] { --split: 52%; }
 
   .rail { transform: translateY(var(--split)); }
   .rail__line { top: 0; bottom: auto; left: 0; right: 0; width: auto; height: 1px;
@@ -711,7 +714,6 @@ body[data-dragged] .peel__hint { opacity: 0; }
   :root { --gutter-l: 0rem; }
 
   .duo, .duo--hero { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; height: 100%; }
-  .act--2 .duo { --col: auto; }
   .act--2 .side--a { padding-left: clamp(1.1rem, 5vw, 1.8rem); padding-top: calc(var(--cap-h) + .9rem); }
   .act--2 .side--a .side__inner { max-width: none; }
   .side--a, .side--b {
