@@ -55,15 +55,37 @@
   "sameAs": ["https://www.instagram.com/xpresspersonalizados"]
 }
 </script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2676462636195701');
+fbq('track', 'PageView');
+</script>
+<!-- End Meta Pixel Code -->
 </head>
 
 <body data-stop="1">
 
+<!-- Meta Pixel Code (noscript) -->
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2676462636195701&amp;ev=PageView&amp;noscript=1"
+alt=""
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <!--
-  Integracoes (claude.md, secao 9). Nada aqui esta ativo e nada e simulado.
-  Para publicar, injete os IDs no build a partir de variaveis de ambiente
-  (XPRESS_GTM_ID, XPRESS_META_PIXEL_ID) e acrescente o snippet oficial.
-  Nao cole IDs direto neste arquivo.
+  Integracoes (claude.md, secao 9). O pixel da Meta acima esta ativo: o ID de
+  pixel e publico por natureza, ele viaja no HTML servido a cada visitante.
+  O GTM e o Analytics continuam fora: para ligar, injete o ID no build a
+  partir de XPRESS_GTM_ID e acrescente o snippet oficial.
 -->
 
 <span data-sc-progress aria-hidden="true"></span>
