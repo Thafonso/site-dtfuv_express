@@ -44,6 +44,7 @@
 
   function measureVh() {
     lastW = window.innerWidth;
+    narrowBase = null;   /* a altura mudou: a peça está em outro lugar */
     var probe = document.createElement('div');
     probe.style.cssText =
       'position:absolute;top:0;left:0;width:0;height:100lvh;visibility:hidden;pointer-events:none';
@@ -57,12 +58,33 @@
 
   /* ---- 1 · a divisória: posição de base por parada --------------------- */
 
-  /* a posição de onde o pico começa a fechar a divisória: a mesma do ato 2,
-     que é o ato imediatamente anterior */
-  var BASE_WIDE   = 42;   /* % — mesmo valor de body[data-stop="2"] em site.css */
-  var BASE_NARROW = 46;
+  /* a posição de onde o pico começa a fechar a divisória: no desktop é a mesma
+     do ato 2, o ato imediatamente anterior; no telefone, o teto medido abaixo */
+  var BASE_WIDE   = 50;   /* % — mesmo valor de body[data-stop="2"] em site.css */
+  var BASE_NARROW = 52;
 
-  function baseSplit() { return narrow.matches ? BASE_NARROW : BASE_WIDE; }
+  /* No telefone o palco do pico é uma coluna só: a cópia em cima, a peça de
+     vidro embaixo. A meia tela a divisória cai dentro do vidro e risca a arte
+     justo enquanto o filme é destacado. Então ela começa logo acima da peça e
+     sobe dali: o mesmo movimento, no espaço que é dele.
+     A medida sai do próprio palco — fixo e da altura da tela —, então vale em
+     qualquer aparelho, e é lida uma vez por layout, não a cada quadro. */
+  var PEAK_GAP   = 16;    /* px de folga entre a linha e a borda da peça */
+  var narrowBase = null;
+
+  function narrowPeakBase() {
+    if (narrowBase !== null) return narrowBase;
+    narrowBase = BASE_NARROW;
+    var stage = peakAct && peakAct.querySelector('[data-sc-stage]');
+    if (peelEl && stage && vh > 0) {
+      var top = peelEl.getBoundingClientRect().top - stage.getBoundingClientRect().top;
+      var pct = ((top - PEAK_GAP) / vh) * 100;
+      if (pct > 0 && pct < BASE_NARROW) narrowBase = pct;
+    }
+    return narrowBase;
+  }
+
+  function baseSplit() { return narrow.matches ? narrowPeakBase() : BASE_WIDE; }
 
   /* No telefone os dois lados viram duas faixas empilhadas, e a divisória só
      faz sentido na costura entre elas. Isso já não é problema desta camada:
@@ -226,7 +248,10 @@
     schedule();
   }, { passive: true });
   /* a fonte real muda a altura das linhas, e com ela a parada corrente */
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () {
+    narrowBase = null;
+    schedule();
+  });
 
   stop = 0;
   applyStop(currentStop());
